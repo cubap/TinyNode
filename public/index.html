@@ -409,13 +409,13 @@
                         'Content-Type': 'application/json; charset=utf-8'
                     })
                 })
-                .then(response => response.json())
-                .then(resultObj => {
-                    if(resultObj.code && resultObj.code >= 400){
-                        throw Error(`${resultObj.code}: ${resultObj.message}`)
+                .then(response => {
+                    const locationHeader = response.headers.get("Location")
+                    if(response?.code >= 400){
+                        throw Error(`${response?.code}: ${response.statusText}`)
                     }
-                    setMessage("Created new object.  See result below.")
-                    setObject(resultObj.new_obj_state)
+                    setMessage(`Created new object at ${locationHeader ?? MISSING}.  See result below.`)
+                    setObject(Object.assign({'@id':locationHeader},obj))
                 })
                 .catch(err => {
                     console.error("There was an error trying to create object")

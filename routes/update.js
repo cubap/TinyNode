@@ -11,7 +11,7 @@ router.put('/', async (req, res, next) => {
     const updateBody = req.body
 
     // check for @id; any value is valid
-    if(!(updateBody['@id']??updateBody.id) {
+    if (!(updateBody['@id'] ?? updateBody.id)) {
       throw Error("No record id to update! (https://centerfordigitalhumanities.github.io/rerum_server/API.html#update)")
     }
 
@@ -22,11 +22,8 @@ router.put('/', async (req, res, next) => {
         'Authorization': `Bearer ${process.env.access_token}` // not required for query
       }
     }
-    const queryURL = `${process.env.RERUM_URL}${process.env.CREATE}`
-    const result = await got.post(queryURL, updateOptions)
-      .then((saved) => {
-        res.setHeader("Location", saved.headers["location"])
-      })
+    const updateURL = `${process.env.RERUM_URL}${process.env.UPDATE}`
+    const result = await got.put(updateURL, updateOptions).json()
     res.status(200)
     res.send(result)
   }

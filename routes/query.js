@@ -7,7 +7,6 @@ router.post('/', async (req, res, next) => {
   const lim = req.query.limit ?? 0
   const skip = req.query.skip ?? 0
 
-
   try {
     // check body for JSON
     JSON.stringify(req.body)

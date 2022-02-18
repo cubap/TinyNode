@@ -17,7 +17,7 @@ router.post('/', async (req, res, next) => {
         'Authorization': `Bearer ${process.env.access_token}` // not required for query
       }
     }
-    const queryURL = `${process.env.RERUM_URL}${process.env.CREATE}`
+    const queryURL = `${process.env.RERUM_API_ADDR}${process.env.CREATE}`
     const result = await got.post(queryURL, createOptions)
       .then((saved) => {
         res.setHeader("Location", saved.headers["location"])

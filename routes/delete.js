@@ -17,7 +17,7 @@ router.delete('/:id', async (req, res, next) => {
     }
     console.log(deleteBody)
     console.log(JSON.stringify(deleteBody))
-    const queryURL = `${process.env.RERUM_API_ADDR}${process.env.DELETE}`
+    const queryURL = `${process.env.RERUM_API_ADDR}delete`
     const result = await got.delete(queryURL, deleteOptions).text()
     res.status(204)
     res.send(result)

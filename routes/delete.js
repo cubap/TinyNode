@@ -6,7 +6,7 @@ const got = require('got')
 router.delete('/:id', async (req, res, next) => {
 
   try {
-    const deleteBody = {'@id':`${process.env.RERUM_URL.replace('/api/','/id/')}${req.params.id}`}
+    const deleteBody = {'@id':`${process.env.RERUM_ID_PATTERN}${req.params.id}`}
 
     const deleteOptions = {
       json: deleteBody,

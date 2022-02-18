@@ -26,7 +26,7 @@ router.post('/', async (req, res, next) => {
         'Authorization': `Bearer ${process.env.RERUM_TOKEN}` // not required for query
       }
     }
-    const queryURL = `${process.env.RERUM_URL}${process.env.QUERY}?limit=${lim}&skip=${skip}`
+    const queryURL = `${process.env.RERUM_API_ADDR}query?limit=${lim}&skip=${skip}`
     const results = await got.post(queryURL, queryOptions).json()
     res.status(200)
     res.send(results)

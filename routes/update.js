@@ -22,7 +22,7 @@ router.put('/', async (req, res, next) => {
         'Authorization': `Bearer ${process.env.access_token}` // not required for query
       }
     }
-    const updateURL = `${process.env.RERUM_URL}${process.env.UPDATE}`
+    const updateURL = `${process.env.RERUM_API_ADDR}update`
     const result = await got.put(updateURL, updateOptions).json()
     res.status(200)
     res.send(result)

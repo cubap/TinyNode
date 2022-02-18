@@ -1,4 +1,5 @@
 require('dotenv').config()
+import fetch from 'node-fetch'
 
 // https://stackoverflow.com/a/69058154/1413302
 const isTokenExpired = (token) => (Date.now() >= JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString()).exp * 1000)

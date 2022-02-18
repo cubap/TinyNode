@@ -22,7 +22,7 @@ router.put('/', async (req, res, next) => {
         'Authorization': `Bearer ${process.env.access_token}`
       }
     }
-    const overwriteURL = `${process.env.RERUM_URL}${process.env.OVERWRITE}`
+    const overwriteURL = `${process.env.RERUM_API_ADDR}overwrite`
     const result = await got.put(overwriteURL, overwriteOptions).json()
     res.status(200)
     res.send(result)

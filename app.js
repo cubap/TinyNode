@@ -3,8 +3,12 @@ var express = require('express')
 var path = require('path')
 var cookieParser = require('cookie-parser')
 var logger = require('morgan')
-require('dotenv').config()
-require('./tokens')
+var dotenv = require('dotenv')
+var dotenvExpand = require('dotenv-expand')
+var storedEnv = dotenv.config()
+dotenvExpand.expand(storedEnv)
+
+// require('./tokens.js') //SyntaxError: Cannot use import statement outside a module WTF
 
 var indexRouter = require('./routes/index')
 var queryRouter = require('./routes/query')

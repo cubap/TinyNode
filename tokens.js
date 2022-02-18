@@ -10,7 +10,7 @@ const isTokenExpired = (token) => (Date.now() >= JSON.parse(Buffer.from(token.sp
  */
 function generateNewAccessToken() {
     const payload = {
-        methdo: 'POST',
+        method: 'POST',
         body: JSON.stringify({ refresh_token: process.env.refresh_token })
     }
     fetch(process.env.RERUM_ACCESS_TOKEN_URL, payload)

@@ -6,7 +6,7 @@ const got = require('got')
 router.delete('/:id', async (req, res, next) => {
 
   try {
-    const deleteBody = {'@id':`${process.env.RERUM_URL.replace('/api/','/id/')}${req.params.id}`}
+    const deleteBody = {'@id':`${process.env.RERUM_API_ADDR.replace('/api/','/id/')}${req.params.id}`}
 
     const deleteOptions = {
       json: deleteBody,
@@ -17,7 +17,7 @@ router.delete('/:id', async (req, res, next) => {
     }
     console.log(deleteBody)
     console.log(JSON.stringify(deleteBody))
-    const queryURL = `${process.env.RERUM_URL}${process.env.DELETE}`
+    const queryURL = `${process.env.RERUM_API_ADDR}${process.env.DELETE}`
     const result = await got.delete(queryURL, deleteOptions).text()
     res.status(204)
     res.send(result)

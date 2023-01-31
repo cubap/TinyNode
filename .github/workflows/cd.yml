@@ -22,5 +22,6 @@ jobs:
             fi
             cd /opt/nodeapps/tiny-node/
             pm2 stop tinyNode
+            git pull
             npm install
             pm2 start -i max bin/tinyNode.js

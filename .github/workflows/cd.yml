@@ -16,7 +16,7 @@ jobs:
       steps:
         - uses: actions/checkout@v3
         - run: |
-            if [[ ! -e /opt/nodeapps/logs/tinynodelogs.txt ]]; then
+            if [[ ! -e /opt/nodeapps/logs/tinynode.txt ]]; then
                 mkdir -p /opt/nodeapps/logs
                 touch /opt/nodeapps/logs/tinynode.txt
             fi

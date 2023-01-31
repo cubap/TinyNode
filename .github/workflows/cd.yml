@@ -1,0 +1,26 @@
+name: TinyNode Site Deploy
+on: 
+  push:
+    branches:
+      ci-cd
+  pull_request:
+    branches:
+      ci-cd
+jobs:
+    deploy:
+      # Deploy to newprd01 with SSH
+      runs-on: self-hosted
+      strategy: 
+        matrix:
+            node-version: [16]
+      steps:
+        - uses: actions/checkout@v3
+        - run: |
+            if [[ ! -e /opt/nodeapps/logs/dlalogs.txt ]]; then
+                mkdir -p /opt/nodeapps/logs
+                touch /opt/nodeapps/logs/dlalogs.txt
+            fi
+            cd /opt/nodeapps/dla-public-site-3001/
+            pm2 stop tinyNode
+            npm install
+            pm2 start -i max bin/tinyNode

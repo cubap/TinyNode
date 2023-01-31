@@ -14,7 +14,7 @@ jobs:
       - name: Create .env from secrets
         uses: SpicyPizza/create-envfile@v1.3
         with:
-          envkey_APP_ACCESS_TOKEN: ${{ secrets.ACCESSS_TOKEN }}
+          envkey_APP_ACCESS_TOKEN: ${{ secrets.APP_ACCESSS_TOKEN }}
           envkey_REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           envkey_RERUM_REGISTRATION_URL: ${{ secrets.RERUM_REGISTRATION_URL }}
           envkey_RERUM_API_ADDR: ${{ secrets.RERUM_API_ADDR }}

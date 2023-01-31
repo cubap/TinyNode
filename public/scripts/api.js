@@ -46,7 +46,7 @@ async function query(form) {
 
 /**
  * Import an object that exists outside of RERUM into RERUM, attributed to this application's RERUM registration agent.
- * @see /src/rerm/tokens/tiny.properties ACCESS_TOKEN entry for attribution
+ * @see /src/rerm/tokens/tiny.properties APP_ACCESS_TOKEN entry for attribution
  * @param {type} form
  */
 async function importObj(form) {
@@ -80,7 +80,7 @@ async function importObj(form) {
 
 /**
  * Do a PUT update on an existing RERUM object.  The resulting object is attributed to this application's RERUM registration agent.
- * @see /src/rerm/tokens/tiny.properties ACCESS_TOKEN entry for attribution
+ * @see /src/rerm/tokens/tiny.properties APP_ACCESS_TOKEN entry for attribution
  * @param {type} form
  * @param {object} objIn An optional way to pass the new JSON representation as a parameter
  */
@@ -122,7 +122,7 @@ async function update(form, objIn) {
 
 /**
  * Provide a JSON object to create in RERUM.  The resulting object is attributed to this application's RERUM registration agent.
- * @see /src/rerm/tokens/tiny.properties ACCESS_TOKEN entry for attribution
+ * @see /src/rerm/tokens/tiny.properties APP_ACCESS_TOKEN entry for attribution
  * @param {type} form
  */
 async function create(form) {
@@ -157,7 +157,7 @@ async function create(form) {
 
 /**
   * Provide the URL of a RERUM object to delete.  Only those objects attributed to this application's RERUM registration agent can be deleted.
-  * @see /src/rerm/tokens/tiny.properties ACCESS_TOKEN entry for attribution
+  * @see /src/rerm/tokens/tiny.properties APP_ACCESS_TOKEN entry for attribution
   * @param {type} form
   */
 async function deleteObj(form) {
@@ -182,7 +182,7 @@ async function deleteObj(form) {
 /**
  * Overwrite the representation of a JSON object at a given URL. Note this will not create a new node in history, it will overwrite the existing node.
  * TOnly those objects attributed to this application's RERUM registration agent can be overwritten.
- * @see /src/rerm/tokens/tiny.properties ACCESS_TOKEN entry for attribution
+ * @see /src/rerm/tokens/tiny.properties APP_ACCESS_TOKEN entry for attribution
  * @param {type} form
  * @param {object} objIn An optional way to pass the new JSON representation as a parameter
  */

@@ -11,12 +11,12 @@ const isTokenExpired = (token) => (Date.now() >= JSON.parse(Buffer.from(token.sp
  */
 async function generateNewAccessToken() {
     try {
-        const { tokenObject } = await got.post(process.env.RERUM_ACCESS_TOKEN_URL, {
+        const { tokenObject } = await got.post(process.env.RERUM_APP_ACCESS_TOKEN_URL, {
             timeout: 10000,
             json: { REFRESH_TOKEN: process.env.REFRESH_TOKEN }
         }).json()
 
-        process.env.ACCESS_TOKEN = tokenObject.ACCESS_TOKEN
+        process.env.APP_ACCESS_TOKEN = tokenObject.APP_ACCESS_TOKEN
     }
     catch (err) { console.error("Token not updated: ", err) }
 
@@ -28,4 +28,4 @@ async function generateNewAccessToken() {
  * This does not validate your access token, so you may still be rejected by 
  * your RERUM instance as unauthorized.
  */
-if (isTokenExpired(process.env.ACCESS_TOKEN)) { generateNewAccessToken() }
+if (isTokenExpired(process.env.APP_ACCESS_TOKEN)) { generateNewAccessToken() }

@@ -50,7 +50,7 @@ module.exports = {
   silent: true,
 
   // The root directory that Jest should scan for tests and modules within
-  rootDir: "./",
+  rootDir: "./__tests__",
 
   // The directory where Jest should output its coverage files.  Default is /coverage/.  See /coverage/index.html.
   // coverageDirectory: undefined,

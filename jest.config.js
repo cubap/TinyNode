@@ -21,7 +21,7 @@ module.exports = {
   detectOpenHandles : false,
 
   displayName: {
-    name: 'TinyNode Site',
+    name: 'TinyNode',
     color: 'cyan',
   },
 
@@ -50,7 +50,7 @@ module.exports = {
   silent: true,
 
   // The root directory that Jest should scan for tests and modules within
-  rootDir: "./__tests__",
+  rootDir: "./",
 
   // The directory where Jest should output its coverage files.  Default is /coverage/.  See /coverage/index.html.
   // coverageDirectory: undefined,

@@ -16,11 +16,11 @@ jobs:
       steps:
         - uses: actions/checkout@v3
         - run: |
-            if [[ ! -e /opt/nodeapps/logs/dlalogs.txt ]]; then
+            if [[ ! -e /opt/nodeapps/logs/tinynodelogs.txt ]]; then
                 mkdir -p /opt/nodeapps/logs
-                touch /opt/nodeapps/logs/dlalogs.txt
+                touch /opt/nodeapps/logs/tinynode.txt
             fi
-            cd /opt/nodeapps/dla-public-site-3001/
+            cd /opt/nodeapps/tiny-node/
             pm2 stop tinyNode
             npm install
             pm2 start -i max bin/tinyNode

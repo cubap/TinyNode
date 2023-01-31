@@ -11,12 +11,12 @@ const isTokenExpired = (token) => (Date.now() >= JSON.parse(Buffer.from(token.sp
  */
 async function generateNewAccessToken() {
     try {
-        const { tokenObject } = await got.post(process.env.RERUM_APP_ACCESS_TOKEN_URL, {
+        const { tokenObject } = await got.post(process.env.RERUM_ACCESS_TOKEN_URL, {
             timeout: 10000,
             json: { REFRESH_TOKEN: process.env.REFRESH_TOKEN }
         }).json()
 
-        process.env.APP_ACCESS_TOKEN = tokenObject.APP_ACCESS_TOKEN
+        process.env.APP_ACCESS_TOKEN = tokenObject.access_token
     }
     catch (err) { console.error("Token not updated: ", err) }
 

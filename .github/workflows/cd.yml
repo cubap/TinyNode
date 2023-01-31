@@ -23,4 +23,4 @@ jobs:
             cd /opt/nodeapps/tiny-node/
             pm2 stop tinyNode
             npm install
-            pm2 start -i max bin/tinyNode
+            pm2 start -i max bin/tinyNode.js

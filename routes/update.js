@@ -19,7 +19,7 @@ router.put('/', async (req, res, next) => {
       json: updateBody,
       headers: {
         'user-agent': 'Tiny-Node',
-        'Authorization': `Bearer ${process.env.access_token}` // not required for query
+        'Authorization': `Bearer ${process.env.ACCESS_TOKEN}` // not required for query
       }
     }
     const updateURL = `${process.env.RERUM_API_ADDR}update`

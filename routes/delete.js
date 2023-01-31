@@ -12,7 +12,7 @@ router.delete('/:id', async (req, res, next) => {
       json: deleteBody,
       headers: {
         'user-agent': 'Tiny-Node',
-        'Authorization': `Bearer ${process.env.access_token}`
+        'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`
       }
     }
     console.log(deleteBody)

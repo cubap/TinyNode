@@ -26,7 +26,7 @@ app.set('view engine', 'pug')
 
 app.use(logger('dev'))
 app.use(express.json())
-if(process.env.open_api_cors !== "false") { 
+if(process.env.OPEN_API_CORS !== "false") { 
   // This enables CORS for all requests. We may want to update this in the future and only apply to some routes.
   const cors = require('cors')
   app.use(cors()) 

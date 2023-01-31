@@ -21,6 +21,6 @@ jobs:
                 touch /opt/nodeapps/logs/tinynode.txt
             fi
             cd /opt/nodeapps/tiny-node/
-            pm2 stop tinyNode
+            pm2 delete tinyNode 2> /dev/null || true
             npm install
             pm2 start -i max bin/tinyNode

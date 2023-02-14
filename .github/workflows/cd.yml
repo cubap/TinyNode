@@ -20,7 +20,6 @@ jobs:
                 mkdir -p /opt/nodeapps/logs
                 touch /opt/nodeapps/logs/tinynode.txt
             fi
-            whoami
             cd /opt/nodeapps/tiny-node/
             pm2 stop tinyNode
             git stash

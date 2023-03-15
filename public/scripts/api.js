@@ -24,6 +24,8 @@ async function query(form) {
     let entries = form.getElementsByTagName("input")
     let queryObj = {}
     queryObj[entries[0].value] = entries[1].value
+    console.log("api.js query object from front end")
+    console.log(queryObj)
     fetch(QUERY_URL, {
         method: "POST",
         mode: "cors",

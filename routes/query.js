@@ -11,7 +11,10 @@ router.post('/', async (req, res, next) => {
     // check body for JSON
     //JSON.stringify(req.body)
     const queryBody = JSON.parse(JSON.stringify(req.body))
-
+    console.log("I should have a request body in query.js")
+    console.log(req.body)
+    console.log(JSON.stringify(req.body))
+    console.log(queryBody)
     // check limit and skip for INT
     if (isNaN(parseInt(lim) + parseInt(skip))
       || (lim < 0)
@@ -26,10 +29,10 @@ router.post('/', async (req, res, next) => {
         'Authorization': `Bearer ${process.env.RERUM_TOKEN}` // not required for query
       }
     }
+
+    console.log("query.js queryOptions are")
+
     const queryURL = `${process.env.RERUM_API_ADDR}query?limit=${lim}&skip=${skip}`
-    console.log("Send these parameters forward")
-    console.log(queryURL)
-    console.log(JSON.stringify(queryOptions))
     const results = await got.post(queryURL, queryOptions).json()
     res.status(200)
     res.send(results)

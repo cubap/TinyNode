@@ -144,11 +144,9 @@ async function create(form) {
     })
     .then(response => {
         if (!response.ok) { throw response }
-        return response.json()
-    })
-    .then(response => {
         const locationHeader = response.headers.get("Location") ?? response.headers.get("location")
         _customEvent("rerum-result", `Created new object at ${locationHeader ?? MISSING}.  See result below.`, Object.assign({ '@id': locationHeader }, obj))
+        return response.json()
     })
     .catch(err => {
         _customEvent("rerum-error", "There was an error trying to create object", {}, err)

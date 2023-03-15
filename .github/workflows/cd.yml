@@ -16,11 +16,11 @@ jobs:
       steps:
         - uses: actions/checkout@v3
         - run: |
-            if [[ ! -e /opt/nodeapps/logs/tinynode.txt ]]; then
-                mkdir -p /opt/nodeapps/logs
-                touch /opt/nodeapps/logs/tinynode.txt
+            if [[ ! -e /srv/node/logs/tinynode.txt ]]; then
+                mkdir -p /srv/node/logs
+                touch /srv/node/logs/tinynode.txt
             fi
-            cd /opt/nodeapps/tiny-node/
+            cd /srv/node/tiny-node/
             pm2 stop tinyNode
             git stash
             git pull

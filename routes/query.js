@@ -9,8 +9,8 @@ router.post('/', async (req, res, next) => {
 
   try {
     // check body for JSON
-    JSON.stringify(req.body)
-    const queryBody = req.body
+    //JSON.stringify(req.body)
+    const queryBody = JSON.parse(JSON.stringify(req.body))
 
     // check limit and skip for INT
     if (isNaN(parseInt(lim) + parseInt(skip))

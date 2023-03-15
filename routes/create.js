@@ -18,10 +18,8 @@ router.post('/', async (req, res, next) => {
       }
     }
     const createURL = `${process.env.RERUM_API_ADDR}create`
-    const result = await got.post(createURL, createOptions)
-      .then((saved) => {
-        res.setHeader("Location", saved.headers["location"])
-      }).json()
+    const result = await got.post(createURL, createOptions).json()
+    res.setHeader("Location", result["@id"])
     res.status(201)
     res.send(result)
   }

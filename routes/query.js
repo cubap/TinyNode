@@ -27,6 +27,9 @@ router.post('/', async (req, res, next) => {
       }
     }
     const queryURL = `${process.env.RERUM_API_ADDR}query?limit=${lim}&skip=${skip}`
+    console.log("Send these parameters forward")
+    console.log(queryURL)
+    console.log(JSON.stringify(queryOptions))
     const results = await got.post(queryURL, queryOptions).json()
     res.status(200)
     res.send(results)

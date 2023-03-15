@@ -9,7 +9,6 @@ router.post('/', async (req, res, next) => {
     // check body for JSON
     JSON.stringify(req.body)
     const createBody = req.body
-
     const createOptions = {
       json: createBody,
       headers: {

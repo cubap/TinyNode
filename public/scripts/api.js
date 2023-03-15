@@ -24,8 +24,6 @@ async function query(form) {
     let entries = form.getElementsByTagName("input")
     let queryObj = {}
     queryObj[entries[0].value] = entries[1].value
-    console.log("api.js query object from front end")
-    console.log(queryObj)
     fetch(QUERY_URL, {
         method: "POST",
         mode: "cors",
@@ -34,16 +32,16 @@ async function query(form) {
         }),
         body: JSON.stringify(queryObj)
     })
-        .then(response => {
-            if (!response.ok) { throw response }
-            return response.json()
-        })
-        .then(queryResult => {
-            _customEvent("rerum-result", "See all matching results for the query below.", queryResult)
-        })
-        .catch(err => {
-            _customEvent("rerum-error", "There was an error trying to query", {}, err)
-        })
+    .then(response => {
+        if (!response.ok) { throw response }
+        return response.json()
+    })
+    .then(queryResult => {
+        _customEvent("rerum-result", "See all matching results for the query below.", queryResult)
+    })
+    .catch(err => {
+        _customEvent("rerum-error", "There was an error trying to query", {}, err)
+    })
 }
 
 /**

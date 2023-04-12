@@ -171,7 +171,8 @@ async function deleteObj(form) {
         })
     })
     .then(response => {
-        if (response.status === 204) {                
+        if (response.status === 204) {
+            url = url.replace(/^https?:/,location.protocol) // avoid mixed content                
             return fetch(url).then(resp => resp.json()).then(deletedObj => _customEvent("rerum-result", "Object Deleted.  See result below.", deletedObj))
         }
         throw response

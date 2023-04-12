@@ -3,13 +3,16 @@ on:
   push:
     branches:
       main
+  pull_request:
+    branches:
+      main
 jobs:
     deploy:
       # Deploy to newprd01 with SSH
       strategy: 
         matrix:
             node-version: [16]
-            machines: [vlcdhp02, vlcdhprdp02]
+            machines: [vlcdhp02]
       runs-on: ${{ matrix.machines }}
       steps:
         - uses: actions/checkout@v3

@@ -60,14 +60,14 @@
             <span class="returns success">200: [results]</span>
             <span class="returns error">500: Server Error</span>
         </div>
-        <button data-lang-key="importBtn" role="button" onclick="UI.showForm('remoteUpdate',this)"></button>
+<!--         <button data-lang-key="importBtn" role="button" onclick="UI.showForm('remoteUpdate',this)"></button>
         <div class="api-legend">
             <header>put</header>
             <span class="payload">JSON Object</span>
             <span class="returns success">200: Success</span>
             <span class="returns error">403: No Valid Token</span>
             <span class="returns error">500: Server Error</span>
-        </div>
+        </div> -->
     </div>
 
     <form id="query" action="javascript:void(0);" onsubmit="Action.query(this)" data-hidden="true">
@@ -83,7 +83,7 @@
         <input type="text" id="queryValue" />
         <button type="submit" role="button" data-lang-key="queryBtn"> </button>
     </form>
-    <form id="remoteUpdate" action="javascript:void(0);" onsubmit="Action.import(this)" data-hidden="true">
+<!--     <form id="remoteUpdate" action="javascript:void(0);" onsubmit="Action.import(this)" data-hidden="true">
         <h2 data-lang-key="importTitle"></h2>
         <button data-lang-key="loadExample" type="button" class="example"
             onclick="queryValue.value='https://iiif.io/api/cookbook/recipe/0001-mvm-image/manifest.json'"></button>
@@ -93,7 +93,7 @@
         </label>
         <input type="url" id="importId" />
         <button type="submit" role="button" data-lang-key="importBtn"> </button>
-    </form>
+    </form> -->
     <form id="rerumUpdate" action="javascript:void(0);" onsubmit="Action.update(this)" data-hidden="true">
         <h2 data-lang-key="updateTitle"></h2>
         <p data-lang-key="updateDesc">

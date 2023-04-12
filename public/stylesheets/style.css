@@ -51,8 +51,7 @@ a {
   color: #00B7FF;
 }
 
-form[data-hidden],
-#obj-viewer {
+form[data-hidden] {
   display    : none;
   grid-column: page / span 1;
   grid-row   : content / span 1;
@@ -162,6 +161,9 @@ div#flash-message.success {
 }
 
 div#obj-viewer {
+  display    : none;
+  width: fit-content;
+  grid-column: page / span 1;
   white-space : pre;
   font-family : monospace;
   font-size   : .8rem;

@@ -41,10 +41,14 @@ PORT = 3005
 ```
 
 Now, you can run tests
-`npm run runtest`
+```shell
+npm run runtest
+```
 
 And start the app
-`npm start`
+```shell
+npm start
+```
 
 Your TinyThings will attempt to run at `http://localhost:3005`.  If port `3005` is taken, then update the .env value `PORT` to an open port and try to start it again.
 

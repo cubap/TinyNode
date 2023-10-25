@@ -27,10 +27,14 @@ OPEN_API_CORS = false
 ```
 
 Now, you can run tests
-`npm run runtest`
+```shell
+npm run runtest
+```
 
 And start the app
-`npm start`
+```shell
+npm start
+```
 
 To stop the application, kill or exit the process via your shell (<kbd>CTRL + C</kbd> or <kbd>CTRL + X</kbd>).
 

@@ -210,3 +210,15 @@ div#obj-viewer {
 .api-legend .returns.error {
   color: #ff6666;
 }
+
+os-statement {
+    position: fixed;
+    display: block;
+    right: 0;
+    background-color: wheat;
+    font-family: monospace;
+    font-size: 10pt;
+    font-weight: bold;
+    color: black;
+    padding: 1em;
+}

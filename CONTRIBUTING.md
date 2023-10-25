@@ -1,5 +1,12 @@
 # Contribute to the TinyThings RERUM Client
-
+```
+██████╗ ███████╗██████╗ ██╗   ██╗███╗   ███╗
+██╔══██╗██╔════╝██╔══██╗██║   ██║████╗ ████║
+██████╔╝█████╗  ██████╔╝██║   ██║██╔████╔██║
+██╔══██╗██╔══╝  ██╔══██╗██║   ██║██║╚██╔╝██║
+██║  ██║███████╗██║  ██║╚██████╔╝██║ ╚═╝ ██║
+╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝
+```
 ## ❤️ Thank You
 
 Thank you for considering a contribution to this application!  The `main` branch is protected and you cannot push to it. 

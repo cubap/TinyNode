@@ -33,10 +33,10 @@ Create a file named `.env` in the root folder.  In the above example, the root i
 ```shell
 ACCESS_TOKEN = OBTAINED_FROM_ADMINS
 REFRESH_TOKEN = OBTAINED_FROM_ADMINS
-RERUM_REGISTRATION_URL = https://devstore.rerum.io/v1/
-RERUM_API_ADDR = https://devstore.rerum.io/v1/api/
-RERUM_ID_PATTERN = https://devstore.rerum.io/v1/id/
-RERUM_ACCESS_TOKEN_URL = https://devstore.rerum.io/v1/client/request-new-access-token
+RERUM_REGISTRATION_URL = https://store.rerum.io/v1/
+RERUM_API_ADDR = https://store.rerum.io/v1/api/
+RERUM_ID_PATTERN = https://store.rerum.io/v1/id/
+RERUM_ACCESS_TOKEN_URL = https://store.rerum.io/v1/client/request-new-access-token
 PORT = 3005
 ```
 
@@ -48,7 +48,7 @@ And start the app
 
 Your TinyThings will attempt to run at `http://localhost:3005`.  If port `3005` is taken, then update the .env value `PORT` to an open port and try to start it again.
 
-To stop the service, kill or exit the process via your shell (<kbd>CTRL + c</kbd> or <kbd>CTRL + x</kbd>).
+To stop the application, kill or exit the process via your shell (<kbd>CTRL + C</kbd> or <kbd>CTRL + X</kbd>).
 
 ## 🎉 Ready to Start Contributing!
 

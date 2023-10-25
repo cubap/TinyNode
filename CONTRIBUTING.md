@@ -38,6 +38,7 @@ RERUM_API_ADDR = https://store.rerum.io/v1/api/
 RERUM_ID_PATTERN = https://store.rerum.io/v1/id/
 RERUM_ACCESS_TOKEN_URL = https://store.rerum.io/v1/client/request-new-access-token
 PORT = 3005
+OPEN_API_CORS = false
 ```
 
 Now, you can run tests

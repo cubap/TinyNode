@@ -36,8 +36,8 @@ jobs:
             ${{ runner.os }}-
       - name: Install dependencies then run test script
         uses: actions/checkout@master
-        run: npm install
-        run: npm run runtest
+      -  run: npm install
+      -  run: npm run runtest
   deploy:
     needs: [test]
     strategy:

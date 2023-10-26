@@ -1,28 +1,3 @@
-name: TinyNode production deploy on push to main.
-on: 
-  push:
-    branches:
-      CD-update-for-contributions
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@master
-      - run: npm install
-      - run: npm run runtest
-  deploy:
-    needs: [test]
-    strategy:
-      matrix:
-        machines: [vlcdhprdp02]
-    runs-on: ${{ matrix.machines }}
-    steps:
-      - uses: actions/checkout@master
-      - run: |
-          echo "Production Deploy Occurred"
-
-
-
 name: TinyNode Dev Deploy on PR to main
 on:
   pull_request:

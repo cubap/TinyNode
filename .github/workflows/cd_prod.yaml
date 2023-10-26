@@ -18,7 +18,7 @@ jobs:
           envkey_RERUM_ID_PATTERN: ${{ secrets.RERUM_ID_PATTERN }}
           envkey_RERUM_ACCESS_TOKEN_URL: ${{ secrets.RERUM_ACCESS_TOKEN_URL }}
       - name: Setup Node.js
-      - uses: actions/setup-node@v1
+        uses: actions/setup-node@v1
         with:
           node-version: "16"
       # Speed up subsequent runs with caching
@@ -36,8 +36,8 @@ jobs:
             ${{ runner.os }}-
       - name: Install dependencies then run test script
         uses: actions/checkout@master
-      - run: npm install
-      - run: npm run runtest
+        run: npm install
+        run: npm run runtest
   deploy:
     needs: [test]
     strategy:

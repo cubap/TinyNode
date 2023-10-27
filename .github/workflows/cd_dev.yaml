@@ -1,7 +1,7 @@
 name: TinyNode Dev Deploy on PR to main
 on:
   pull_request:
-    branches: CD-update-for-contributions
+    branches: main
 jobs:
   merge-branch:
     runs-on: ubuntu-latest
@@ -11,7 +11,7 @@ jobs:
         uses: devmasx/merge-branch@master
         with:
           type: now
-          from_branch: CD-update-for-contributions
+          from_branch: main
           target_branch: ${{ github.head_ref }}
           github_token: ${{ secrets.BRY_PAT }}
           message: Merge main into this branch to deploy to dev for testing.
@@ -47,7 +47,7 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Install dependencies then run test script
-      - uses: actions/checkout@master
+        uses: actions/checkout@master
       - run: npm install
       - run: npm run runtest
   deploy:
@@ -60,4 +60,13 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - run: |
-          echo "Development Deploy Occurred"
+          if [[ ! -e /srv/node/logs/tinynode.txt ]]; then
+            mkdir -p /srv/node/logs
+            touch /srv/node/logs/tinynode.txt
+          fi
+          cd /srv/node/tiny-node/
+          pm2 stop tinyNode
+          git stash
+          git pull
+          npm install
+          pm2 start -i max bin/tinyNode.js

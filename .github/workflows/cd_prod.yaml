@@ -1,7 +1,7 @@
 name: TinyNode production deploy on push to main.
 on:
   push:
-    branches: CD-update-for-contributions
+    branches: main
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@master
         with:
-          node-version: "17"
+          node-version: "16"
       - name: Cache node modules
         uses: actions/cache@master
         env:
@@ -48,5 +48,13 @@ jobs:
       - uses: actions/checkout@master
       - name: Deploy the app on the server
         run: |
-          echo "Production Deploy 1"
-          echo "Production Deploy 1"
+          if [[ ! -e /srv/node/logs/tinynode.txt ]]; then
+              mkdir -p /srv/node/logs
+              touch /srv/node/logs/tinynode.txt
+          fi
+          cd /srv/node/tiny-node/
+          pm2 stop tinyNode
+          git stash
+          git pull
+          npm install
+          pm2 start -i max bin/tinyNode.js

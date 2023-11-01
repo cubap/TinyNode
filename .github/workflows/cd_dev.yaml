@@ -62,6 +62,6 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Deploy the app on the server
-      - run: |
+        run: |
           echo "DEV DEPLOY 1"
           echo "DEV DEPLOY 1"

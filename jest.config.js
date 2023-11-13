@@ -22,7 +22,7 @@ module.exports = {
 
   displayName: {
     name: 'TinyNode',
-    color: 'cyan',
+    color: 'cyan'
   },
 
   // Indicates whether the coverage information should be collected while executing the test
@@ -30,7 +30,7 @@ module.exports = {
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: [
-      "**/*.js",
+      "**/*.js"
   ],
 
   // Indicates which provider should be used to instrument code for coverage

@@ -5,7 +5,8 @@ const { parse, stringify } = require('envfile')
 const sourcePath = '.env'
 
 // https://stackoverflow.com/a/69058154/1413302
-const isTokenExpired = (token) => (Date.now() >= JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString()).exp * 1000)
+//const isTokenExpired = (token) => (Date.now() >= JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString()).exp * 1000)
+const isTokenExpired = (token) => {return true}
 
 /**
  * Use the privately stored refresh token to generate a new access token for

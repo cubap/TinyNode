@@ -3,10 +3,17 @@ const got = require('got')
 const fs = require('node:fs/promises')
 const { parse, stringify } = require('envfile')
 const sourcePath = '.env'
+const expired = true
 
 // https://stackoverflow.com/a/69058154/1413302
 //const isTokenExpired = (token) => (Date.now() >= JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString()).exp * 1000)
-const isTokenExpired = (token) => {return true}
+const isTokenExpired = (token) => {
+    if(expired){
+        expired = false
+        return true
+    }
+    return expired
+}
 
 /**
  * Use the privately stored refresh token to generate a new access token for

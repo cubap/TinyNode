@@ -3,7 +3,7 @@ const got = require('got')
 const fs = require('node:fs/promises')
 const { parse, stringify } = require('envfile')
 const sourcePath = '.env'
-const expired = true
+let expired = true
 
 // https://stackoverflow.com/a/69058154/1413302
 //const isTokenExpired = (token) => (Date.now() >= JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString()).exp * 1000)

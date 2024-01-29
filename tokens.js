@@ -6,14 +6,7 @@ const sourcePath = '.env'
 let expired = true
 
 // https://stackoverflow.com/a/69058154/1413302
-//const isTokenExpired = (token) => (Date.now() >= JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString()).exp * 1000)
-const isTokenExpired = (token) => {
-    if(expired){
-        expired = false
-        return true
-    }
-    return expired
-}
+const isTokenExpired = (token) => (Date.now() >= JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString()).exp * 1000)
 
 /**
  * Use the privately stored refresh token to generate a new access token for

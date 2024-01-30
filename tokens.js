@@ -42,7 +42,7 @@ async function generateNewAccessToken() {
  * This does not validate your access token, so you may still be rejected by 
  * your RERUM instance as unauthorized.
  */
-if (isTokenExpired(process.env.ACCESS_TOKEN)) { 
+if (isTokenExpired(process.env.ACCESS_TOKEN_EXPIRED)) { 
     console.log("Tiny Node detected an expired access token.  Updating the token now.")
     generateNewAccessToken() 
 }

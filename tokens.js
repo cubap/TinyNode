@@ -26,6 +26,7 @@ async function generateNewAccessToken() {
             let env_file_obj = parse(data)
             env_file_obj.ACCESS_TOKEN = tokenObject.access_token
             await fs.writeFile('./.env', stringify(env_file_obj))
+            console.log("TinyNode now has an updated access token.")
         }
         catch(env_error){
             console.error("Could not write new token property to the file.  The access token has not been updated.")

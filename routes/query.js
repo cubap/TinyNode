@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const got = require('got')
 
 /* POST a query to the thing. */
 router.post('/', async (req, res, next) => {
@@ -18,7 +17,8 @@ router.post('/', async (req, res, next) => {
       throw Error("`limit` and `skip` values must be positive integers or omitted.")
     }
     const queryOptions = {
-      json: queryBody,
+      method: 'POST',
+      body: queryBody,
       headers: {
         'user-agent': 'Tiny-Node',
         'Authorization': `Bearer ${process.env.RERUM_TOKEN}`, // not required for query
@@ -26,7 +26,7 @@ router.post('/', async (req, res, next) => {
       }
     }
     const queryURL = `${process.env.RERUM_API_ADDR}query?limit=${lim}&skip=${skip}`
-    const results = await got.post(queryURL, queryOptions).json()
+    const results = await fetch(queryURL, queryOptions).json()
     res.status(200)
     res.send(results)
   }

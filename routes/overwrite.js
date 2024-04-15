@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const got = require('got')
 
 /* PUT an overwrite to the thing. */
 router.put('/', async (req, res, next) => {
@@ -16,7 +15,8 @@ router.put('/', async (req, res, next) => {
     }
 
     const overwriteOptions = {
-      json: overwriteBody,
+      method: 'PUT',
+      body: overwriteBody,
       headers: {
         'user-agent': 'Tiny-Node',
         'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`,
@@ -24,11 +24,11 @@ router.put('/', async (req, res, next) => {
       }
     }
     const overwriteURL = `${process.env.RERUM_API_ADDR}overwrite`
-    const result = await got.put(overwriteURL, overwriteOptions).json()
+    const result = await fetch(overwriteURL, overwriteOptions).json()
     res.status(200)
     res.send(result)
   }
-  catch (err) {
+  catch (err) {    
     console.log(err)
     res.status(500).send("Caught Error:" + err)
   }

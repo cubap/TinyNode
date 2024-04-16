@@ -6,17 +6,16 @@ router.put('/', async (req, res, next) => {
 
   try {
     // check body for JSON
-    JSON.stringify(req.body)
-    const overwriteBody = req.body
+    const body = JSON.stringify(req.body)
 
     // check for @id; any value is valid
-    if (!(overwriteBody['@id'] ?? overwriteBody.id)) {
+    if (!(body['@id'] ?? body.id)) {
       throw Error("No record id to overwrite! (https://centerfordigitalhumanities.github.io/rerum_server/API.html#overwrite)")
     }
 
     const overwriteOptions = {
       method: 'PUT',
-      body: overwriteBody,
+      body,
       headers: {
         'user-agent': 'Tiny-Node',
         'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`,

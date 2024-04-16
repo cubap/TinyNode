@@ -6,11 +6,9 @@ const router = express.Router()
 /* DELETE a delete to the thing. */
 router.delete('/', async (req, res, next) => {
   try {
-    JSON.stringify(req.body)
-    const deleteBody = req.body ?? {}
-
+    const body = JSON.stringify(req.body)
     const deleteOptions = {
-      body: deleteBody,
+      body,
       method: 'DELETE',
       headers: {
         'user-agent': 'Tiny-Node',
@@ -18,7 +16,7 @@ router.delete('/', async (req, res, next) => {
         'Content-Type' : "application/json; charset=utf-8"
       }
     }
-    console.log(deleteBody)
+    console.log(body)
     const deleteURL = `${process.env.RERUM_API_ADDR}delete`
     const result = await fetch(deleteURL, deleteOptions).text()
     res.status(204)

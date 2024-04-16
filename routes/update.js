@@ -6,17 +6,16 @@ router.put('/', async (req, res, next) => {
 
   try {
     // check body for JSON
-    JSON.stringify(req.body)
-    const updateBody = req.body
+    const body = JSON.stringify(req.body)
 
     // check for @id; any value is valid
-    if (!(updateBody['@id'] ?? updateBody.id)) {
+    if (!(body['@id'] ?? body.id)) {
       throw Error("No record id to update! (https://centerfordigitalhumanities.github.io/rerum_server/API.html#update)")
     }
 
     const updateOptions = {
       method: 'PUT',
-      body: updateBody,
+      body,
       headers: {
         'user-agent': 'Tiny-Node',
         'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`, // not required for query

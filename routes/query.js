@@ -8,8 +8,7 @@ router.post('/', async (req, res, next) => {
 
   try {
     // check body for JSON
-    JSON.stringify(req.body)
-    const queryBody = req.body
+    const body = JSON.stringify(req.body)
     // check limit and skip for INT
     if (isNaN(parseInt(lim) + parseInt(skip))
       || (lim < 0)
@@ -18,7 +17,7 @@ router.post('/', async (req, res, next) => {
     }
     const queryOptions = {
       method: 'POST',
-      body: queryBody,
+      body,
       headers: {
         'user-agent': 'Tiny-Node',
         'Authorization': `Bearer ${process.env.RERUM_TOKEN}`, // not required for query

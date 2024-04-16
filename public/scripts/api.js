@@ -27,9 +27,9 @@ async function query(form) {
     fetch(QUERY_URL, {
         method: "POST",
         mode: "cors",
-        headers: new Headers({
+        headers: {
             'Content-Type': 'application/json; charset=utf-8'
-        }),
+        },
         body: JSON.stringify(queryObj)
     })
     .then(response => {
@@ -58,9 +58,9 @@ async function importObj(form) {
             fetch(UPDATE_URL, {
                 method: 'PUT',
                 body: JSON.stringify(objForImport),
-                headers: new Headers({
+                headers: {
                     'Content-Type': 'application/json; charset=utf-8'
-                })
+                }
             })
             .then(response => {
                 if (!response.ok) { throw response }
@@ -105,9 +105,9 @@ async function update(form, objIn) {
     fetch(UPDATE_URL, {
         method: 'PUT',
         body: JSON.stringify(obj),
-        headers: new Headers({
+        headers: {
             'Content-Type': 'application/json; charset=utf-8'
-        })
+        }
     })
     .then(response => {
         if (response.ok) { return response.json() }
@@ -130,7 +130,7 @@ async function update(form, objIn) {
 async function create(form) {
     let obj = form.getElementsByTagName("textarea")[0].value
     try {
-        obj = JSON.parse(obj)
+        JSON.parse(obj)
     } catch (error) {
         console.error("You did not provide valid JSON")
         setMessage("You did not provide valid JSON")
@@ -139,10 +139,10 @@ async function create(form) {
     }
     fetch(CREATE_URL, {
         method: 'POST',
-        body: JSON.stringify(obj),
-        headers: new Headers({
+        body: obj,
+        headers: {
             'Content-Type': 'application/json; charset=utf-8'
-        })
+        }
     })
     .then(response => {
         if (response.ok) { return response.json() }
@@ -166,9 +166,9 @@ async function deleteObj(form) {
     let url = form.getElementsByTagName("input")[0].value
     fetch(`${DELETE_URL}/${url.split('id/').pop()}`, {
         method: 'DELETE',
-        headers: new Headers({
+        headers: {
             'Content-Type': 'text/plain; charset=utf-8'
-        })
+        }
     })
     .then(response => {
         if (response.status === 204) {
@@ -198,7 +198,7 @@ async function overwrite(form, objIn) {
     else {
         obj = form.getElementsByTagName("textarea")[0].value
         try {
-            obj = JSON.parse(obj)
+            JSON.parse(obj)
         }
         catch (err) {
             _customEvent("rerum-error", "You did not provide valid JSON", {}, err)
@@ -208,10 +208,10 @@ async function overwrite(form, objIn) {
     obj["@id"] = uri
     fetch(OVERWRITE_URL, {
         method: 'PUT',
-        body: JSON.stringify(obj),
-        headers: new Headers({
+        body: obj,
+        headers: {
             'Content-Type': 'application/json; charset=utf-8'
-        })
+        }
     })
     .then(response => {
         if (response.ok) { return response.json() }

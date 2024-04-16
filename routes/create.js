@@ -6,10 +6,10 @@ router.post('/', async (req, res, next) => {
 
   try {
     // check body for JSON
-    JSON.stringify(req.body)
+    const body = JSON.stringify(req.body)
     const createOptions = {
       method: 'POST',
-      body: req.body,
+      body,
       headers: {
         'user-agent': 'Tiny-Node',
         'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`, // not required for query

@@ -21,7 +21,7 @@ async function generateNewAccessToken() {
             },
             body: JSON.stringify({ "refresh_token": process.env.REFRESH_TOKEN }),
             timeout: 10000,
-          }).json()
+          }).then(res=>res.json())
         process.env.ACCESS_TOKEN = tokenObject.access_token
         try{
             const data = await fs.readFile('./.env', { encoding: 'utf8' })

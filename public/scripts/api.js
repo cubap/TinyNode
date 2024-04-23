@@ -81,7 +81,7 @@ async function importObj(form) {
 
 /**
  * Do a PUT update on an existing RERUM object.  The resulting object is attributed to this application's RERUM registration agent.
- * @see /src/rerm/tokens/tiny.properties ACCESS_TOKEN entry for attribution
+ * @see /src/rerum/tokens/tiny.properties ACCESS_TOKEN entry for attribution
  * @param {type} form
  * @param {object} objIn An optional way to pass the new JSON representation as a parameter
  */

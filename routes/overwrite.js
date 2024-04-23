@@ -9,7 +9,7 @@ router.put('/', async (req, res, next) => {
     const body = JSON.stringify(req.body)
 
     // check for @id; any value is valid
-    if (!(body['@id'] ?? body.id)) {
+    if (!(req.body['@id'] ?? req.body.id)) {
       throw Error("No record id to overwrite! (https://centerfordigitalhumanities.github.io/rerum_server/API.html#overwrite)")
     }
 

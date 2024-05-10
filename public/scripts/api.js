@@ -88,7 +88,7 @@ async function importObj(form) {
 async function update(form, objIn) {
     let uri = form.getElementsByTagName("input")[0].value
     let obj
-    if (objIn !== undefined && typeof objIn === "object") {
+    if (typeof objIn === "object") {
         obj = objIn
     }
     else {
@@ -192,7 +192,7 @@ async function deleteObj(form) {
 async function overwrite(form, objIn) {
     let uri = form.getElementsByTagName("input")[0].value
     let obj
-    if (objIn !== undefined && typeof objIn === "object") {
+    if (typeof objIn === "object") {
         obj = objIn
     }
     else {

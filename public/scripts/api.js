@@ -32,16 +32,16 @@ async function query(form) {
         },
         body: JSON.stringify(queryObj)
     })
-    .then(response => {
-        if (!response.ok) { throw response }
-        return response.json()
-    })
-    .then(queryResult => {
-        _customEvent("rerum-result", "See all matching results for the query below.", queryResult)
-    })
-    .catch(err => {
-        _customEvent("rerum-error", "There was an error trying to query", {}, err)
-    })
+        .then(response => {
+            if (!response.ok) { throw response }
+            return response.json()
+        })
+        .then(queryResult => {
+            _customEvent("rerum-result", "See all matching results for the query below.", queryResult)
+        })
+        .catch(err => {
+            _customEvent("rerum-error", "There was an error trying to query", {}, err)
+        })
 }
 
 /**
@@ -62,17 +62,17 @@ async function importObj(form) {
                     'Content-Type': 'application/json; charset=utf-8'
                 }
             })
-            .then(response => {
-                if (!response.ok) { throw response }
-                return response.json()
-            })
-            .then(resultObj => {
-                delete resultObj.new_obj_state
-                _customEvent("rerum-result", "Imported object with URI " + url + ". See resulting RERUM object below.", resultObj)
-            })
-            .catch(err => {
-                _customEvent("rerum-error", "There was an error trying to import object with identifier " + url, {}, err)
-            })
+                .then(response => {
+                    if (!response.ok) { throw response }
+                    return response.json()
+                })
+                .then(resultObj => {
+                    delete resultObj.new_obj_state
+                    _customEvent("rerum-result", "Imported object with URI " + url + ". See resulting RERUM object below.", resultObj)
+                })
+                .catch(err => {
+                    _customEvent("rerum-error", "There was an error trying to import object with identifier " + url, {}, err)
+                })
         })
         .catch(err => {
             _customEvent("rerum-error", "Could not resolve object with identifier '" + url + "'", {}, err)
@@ -109,17 +109,17 @@ async function update(form, objIn) {
             'Content-Type': 'application/json; charset=utf-8'
         }
     })
-    .then(response => {
-        if (response.ok) { return response.json() }
-        throw response
-    })
-    .then(resultObj => {
-        delete resultObj.new_obj_state
-        _customEvent("rerum-result", "Updated object with URI " + uri + ".  See resulting object below.", resultObj)
-    })
-    .catch(err => {
-        _customEvent("rerum-error", "There was an error trying to update object at " + url, {}, err)
-    })
+        .then(response => {
+            if (response.ok) { return response.json() }
+            throw response
+        })
+        .then(resultObj => {
+            delete resultObj.new_obj_state
+            _customEvent("rerum-result", "Updated object with URI " + uri + ".  See resulting object below.", resultObj)
+        })
+        .catch(err => {
+            _customEvent("rerum-error", "There was an error trying to update object at " + url, {}, err)
+        })
 }
 
 /**
@@ -144,17 +144,17 @@ async function create(form) {
             'Content-Type': 'application/json; charset=utf-8'
         }
     })
-    .then(response => {
-        if (response.ok) { return response.json() }
-        throw response
-    })
-    .then(resultObj => {
-        delete resultObj.new_obj_state
-        _customEvent("rerum-result", `Created new object at ${resultObj["@id"] ?? MISSING}.  See result below.`, resultObj)
-    })
-    .catch(err => {
-        _customEvent("rerum-error", "There was an error trying to create object", {}, err)
-    })
+        .then(response => {
+            if (response.ok) { return response.json() }
+            throw response
+        })
+        .then(resultObj => {
+            delete resultObj.new_obj_state
+            _customEvent("rerum-result", `Created new object at ${resultObj["@id"] ?? MISSING}.  See result below.`, resultObj)
+        })
+        .catch(err => {
+            _customEvent("rerum-error", "There was an error trying to create object", {}, err)
+        })
 }
 
 /**
@@ -170,16 +170,16 @@ async function deleteObj(form) {
             'Content-Type': 'text/plain; charset=utf-8'
         }
     })
-    .then(response => {
-        if (response.status === 204) {
-            url = url.replace(/^https?:/,location.protocol) // avoid mixed content                
-            return fetch(url).then(resp => resp.json()).then(deletedObj => _customEvent("rerum-result", "Object Deleted.  See result below.", deletedObj))
-        }
-        throw response
-    })
-    .catch(err => {
-        _customEvent("rerum-error", "There was an error trying to delete object", {}, err)
-    })
+        .then(response => {
+            if (response.status === 204) {
+                url = url.replace(/^https?:/, location.protocol) // avoid mixed content                
+                return fetch(url).then(resp => resp.json()).then(deletedObj => _customEvent("rerum-result", "Object Deleted.  See result below.", deletedObj))
+            }
+            throw response
+        })
+        .catch(err => {
+            _customEvent("rerum-error", "There was an error trying to delete object", {}, err)
+        })
 }
 
 /**
@@ -192,38 +192,31 @@ async function deleteObj(form) {
 async function overwrite(form, objIn) {
     let uri = form.getElementsByTagName("input")[0].value
     let obj
-    if (objIn !== undefined && typeof objIn === "object") {
-        obj = objIn
-    }
-    else {
-        obj = form.getElementsByTagName("textarea")[0].value
-        try {
-            JSON.parse(obj)
-        }
-        catch (err) {
-            _customEvent("rerum-error", "You did not provide valid JSON", {}, err)
-            return false
-        }
+    try {
+        obj = (typeof objIn === "object") ? objIn : JSON.parse(form.getElementsByTagName("textarea")[0].value)
+    } catch (err) {
+        _customEvent("rerum-error", "You did not provide valid JSON", {}, err)
+        return false
     }
     obj["@id"] = uri
     fetch(OVERWRITE_URL, {
         method: 'PUT',
-        body: obj,
+        body: JSON.stringify(obj),
         headers: {
             'Content-Type': 'application/json; charset=utf-8'
         }
     })
-    .then(response => {
-        if (response.ok) { return response.json() }
-        throw response
-    })
-    .then(resultObj => {
-        delete resultObj.new_obj_state
-        _customEvent("rerum-result", `URI ${uri} overwritten. See resulting object below:`, resultObj)
-    })
-    .catch(err => {
-        _customEvent("rerum-error", "There was an error trying to overwrite object at " + uri, {}, err)
-    })
+        .then(response => {
+            if (response.ok) { return response.json() }
+            throw response
+        })
+        .then(resultObj => {
+            delete resultObj.new_obj_state
+            _customEvent("rerum-result", `URI ${uri} overwritten. See resulting object below:`, resultObj)
+        })
+        .catch(err => {
+            _customEvent("rerum-error", "There was an error trying to overwrite object at " + uri, {}, err)
+        })
 }
 
 const API = { query, import: importObj, update, create, delete: deleteObj, overwrite }

@@ -20,7 +20,7 @@ function _customEvent(type, message, object, cause) {
  * Send a query into RERUM and show the resulting response.
  * @param {HTMLElement} form 
  */
-async function query(form) {
+function query(form) {
     let entries = form.getElementsByTagName("input")
     let queryObj = {}
     queryObj[entries[0].value] = entries[1].value
@@ -46,12 +46,12 @@ async function query(form) {
 
 /**
  * Import an object that exists outside of RERUM into RERUM, attributed to this application's RERUM registration agent.
- * @see /src/rerm/tokens/tiny.properties ACCESS_TOKEN entry for attribution
+ * @see /src/rerum/tokens/tiny.properties ACCESS_TOKEN entry for attribution
  * @param {type} form
  */
-async function importObj(form) {
+function importObj(form) {
     let url = form.getElementsByTagName("input")[0].value
-    await fetch(url)
+    fetch(url)
         .then(response => response.json())
         .then(objForImport => {
             Object.assign(objForImport, { '@id': url })
@@ -85,7 +85,7 @@ async function importObj(form) {
  * @param {type} form
  * @param {object} objIn An optional way to pass the new JSON representation as a parameter
  */
-async function update(form, objIn) {
+function update(form, objIn) {
     let uri = form.getElementsByTagName("input")[0].value
     let obj
     if (typeof objIn === "object") {
@@ -127,7 +127,7 @@ async function update(form, objIn) {
  * @see /src/rerm/tokens/tiny.properties ACCESS_TOKEN entry for attribution
  * @param {type} form
  */
-async function create(form) {
+function create(form) {
     let obj = form.getElementsByTagName("textarea")[0].value
     try {
         JSON.parse(obj)
@@ -162,7 +162,7 @@ async function create(form) {
   * @see /src/rerm/tokens/tiny.properties ACCESS_TOKEN entry for attribution
   * @param {type} form
   */
-async function deleteObj(form) {
+function deleteObj(form) {
     let url = form.getElementsByTagName("input")[0].value
     fetch(`${DELETE_URL}/${url.split('id/').pop()}`, {
         method: 'DELETE',
@@ -189,7 +189,7 @@ async function deleteObj(form) {
  * @param {type} form
  * @param {object} objIn An optional way to pass the new JSON representation as a parameter
  */
-async function overwrite(form, objIn) {
+function overwrite(form, objIn) {
     let uri = form.getElementsByTagName("input")[0].value
     let obj
     try {

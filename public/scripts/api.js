@@ -27,9 +27,9 @@ async function query(form) {
     fetch(QUERY_URL, {
         method: "POST",
         mode: "cors",
-        headers: new Headers({
+        headers: {
             'Content-Type': 'application/json; charset=utf-8'
-        }),
+        },
         body: JSON.stringify(queryObj)
     })
         .then(response => {
@@ -58,9 +58,9 @@ async function importObj(form) {
             fetch(UPDATE_URL, {
                 method: 'PUT',
                 body: JSON.stringify(objForImport),
-                headers: new Headers({
+                headers: {
                     'Content-Type': 'application/json; charset=utf-8'
-                })
+                }
             })
                 .then(response => {
                     if (!response.ok) { throw response }
@@ -81,7 +81,7 @@ async function importObj(form) {
 
 /**
  * Do a PUT update on an existing RERUM object.  The resulting object is attributed to this application's RERUM registration agent.
- * @see /src/rerm/tokens/tiny.properties ACCESS_TOKEN entry for attribution
+ * @see /src/rerum/tokens/tiny.properties ACCESS_TOKEN entry for attribution
  * @param {type} form
  * @param {object} objIn An optional way to pass the new JSON representation as a parameter
  */
@@ -105,9 +105,9 @@ async function update(form, objIn) {
     fetch(UPDATE_URL, {
         method: 'PUT',
         body: JSON.stringify(obj),
-        headers: new Headers({
+        headers: {
             'Content-Type': 'application/json; charset=utf-8'
-        })
+        }
     })
         .then(response => {
             if (response.ok) { return response.json() }
@@ -130,7 +130,7 @@ async function update(form, objIn) {
 async function create(form) {
     let obj = form.getElementsByTagName("textarea")[0].value
     try {
-        obj = JSON.parse(obj)
+        JSON.parse(obj)
     } catch (error) {
         console.error("You did not provide valid JSON")
         setMessage("You did not provide valid JSON")
@@ -139,10 +139,10 @@ async function create(form) {
     }
     fetch(CREATE_URL, {
         method: 'POST',
-        body: JSON.stringify(obj),
-        headers: new Headers({
+        body: obj,
+        headers: {
             'Content-Type': 'application/json; charset=utf-8'
-        })
+        }
     })
         .then(response => {
             if (response.ok) { return response.json() }
@@ -166,9 +166,9 @@ async function deleteObj(form) {
     let url = form.getElementsByTagName("input")[0].value
     fetch(`${DELETE_URL}/${url.split('id/').pop()}`, {
         method: 'DELETE',
-        headers: new Headers({
+        headers: {
             'Content-Type': 'text/plain; charset=utf-8'
-        })
+        }
     })
         .then(response => {
             if (response.status === 204) {
@@ -185,33 +185,26 @@ async function deleteObj(form) {
 /**
  * Overwrite the representation of a JSON object at a given URL. Note this will not create a new node in history, it will overwrite the existing node.
  * TOnly those objects attributed to this application's RERUM registration agent can be overwritten.
- * @see /src/rerm/tokens/tiny.properties ACCESS_TOKEN entry for attribution
+ * @see /src/rerum/tokens/tiny.properties ACCESS_TOKEN entry for attribution
  * @param {type} form
  * @param {object} objIn An optional way to pass the new JSON representation as a parameter
  */
 async function overwrite(form, objIn) {
     let uri = form.getElementsByTagName("input")[0].value
     let obj
-    if (typeof objIn === "object") {
-        obj = objIn
-    }
-    else {
-        obj = form.getElementsByTagName("textarea")[0].value
-        try {
-            obj = JSON.parse(obj)
-        }
-        catch (err) {
-            _customEvent("rerum-error", "You did not provide valid JSON", {}, err)
-            return false
-        }
+    try {
+        obj = (typeof objIn === "object") ? objIn : JSON.parse(form.getElementsByTagName("textarea")[0].value)
+    } catch (err) {
+        _customEvent("rerum-error", "You did not provide valid JSON", {}, err)
+        return false
     }
     obj["@id"] = uri
     fetch(OVERWRITE_URL, {
         method: 'PUT',
         body: JSON.stringify(obj),
-        headers: new Headers({
+        headers: {
             'Content-Type': 'application/json; charset=utf-8'
-        })
+        }
     })
         .then(response => {
             if (response.ok) { return response.json() }

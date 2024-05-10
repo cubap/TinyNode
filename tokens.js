@@ -1,5 +1,4 @@
 require('dotenv').config()
-const got = require('got')
 const fs = require('node:fs/promises')
 const { parse, stringify } = require('envfile')
 const sourcePath = '.env'
@@ -15,10 +14,14 @@ const isTokenExpired = (token) => (Date.now() >= JSON.parse(Buffer.from(token.sp
  */
 async function generateNewAccessToken() {
     try {
-        const tokenObject = await got.post(process.env.RERUM_ACCESS_TOKEN_URL, {
+        const tokenObject = await fetch(process.env.RERUM_ACCESS_TOKEN_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ "refresh_token": process.env.REFRESH_TOKEN }),
             timeout: 10000,
-            json: { "refresh_token": process.env.REFRESH_TOKEN }
-        }).json()
+          }).then(res=>res.json())
         process.env.ACCESS_TOKEN = tokenObject.access_token
         try{
             const data = await fs.readFile('./.env', { encoding: 'utf8' })

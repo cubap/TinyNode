@@ -51,7 +51,7 @@ async function query(form) {
  */
 async function importObj(form) {
     let url = form.getElementsByTagName("input")[0].value
-    let origObj = await fetch(url)
+    await fetch(url)
         .then(response => response.json())
         .then(objForImport => {
             Object.assign(objForImport, { '@id': url })

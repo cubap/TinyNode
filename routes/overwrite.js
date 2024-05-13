@@ -18,7 +18,7 @@ router.put('/', async (req, res, next) => {
     const overwriteOptions = {
       json: overwriteBody,
       headers: {
-        'user-agent': 'Tiny-Node',
+        'user-agent': 'Tiny-Things/1.0',
         'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`,
         'Content-Type' : "application/json;charset=utf-8"
       }

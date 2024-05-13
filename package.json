@@ -11,7 +11,6 @@
     "runtest": "node ./bin/testApp.js"
   },
   "dependencies": {
-    "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^10.0.0",

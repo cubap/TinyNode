@@ -2,7 +2,6 @@
 var createError = require('http-errors')
 var express = require('express')
 var path = require('path')
-var cookieParser = require('cookie-parser')
 var logger = require('morgan')
 var dotenv = require('dotenv')
 var dotenvExpand = require('dotenv-expand')
@@ -32,7 +31,6 @@ if(process.env.OPEN_API_CORS !== "false") {
   app.use(cors()) 
 }
 app.use(express.urlencoded({ extended: false }))
-app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter)

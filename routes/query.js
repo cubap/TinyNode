@@ -26,6 +26,7 @@ router.post('/', async (req, res, next) => {
     }
     const queryURL = `${process.env.RERUM_API_ADDR}query?limit=${lim}&skip=${skip}`
     const results = await fetch(queryURL, queryOptions).then(res=>res.json())
+    .catch(err=>next(err))
     res.status(200)
     res.send(results)
   }

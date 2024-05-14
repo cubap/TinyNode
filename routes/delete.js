@@ -41,6 +41,7 @@ router.delete('/:id', async (req, res, next) => {
       }
     }
     const result = await fetch(deleteURL, deleteOptions).then(res => res.text())
+    .catch(err=>next(err))
     res.status(204)
     res.send(result)
   }

@@ -28,4 +28,8 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+router.all('/', (req, res, next) => {
+  res.status(405).send("Method Not Allowed")
+})
+
 module.exports = router

@@ -7,6 +7,10 @@ const root = path.join(__dirname,"../public")
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.sendFile('index.html', {root} )
-});
+})
 
-module.exports = router;
+router.all('/', (req, res, next) => {
+  res.status(405).send("Method Not Allowed")
+})
+
+module.exports = router

@@ -130,7 +130,7 @@ async function update(form, objIn) {
 async function create(form) {
     let obj = form.getElementsByTagName("textarea")[0].value
     try {
-        obj = JSON.parse(obj)
+        JSON.parse(obj)
     } catch (error) {
         console.error("You did not provide valid JSON")
         setMessage("You did not provide valid JSON")
@@ -139,7 +139,7 @@ async function create(form) {
     }
     fetch(CREATE_URL, {
         method: 'POST',
-        body: JSON.stringify(obj),
+        body: obj,
         headers: new Headers({
             'Content-Type': 'application/json; charset=utf-8'
         })

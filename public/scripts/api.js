@@ -185,7 +185,7 @@ async function deleteObj(form) {
 /**
  * Overwrite the representation of a JSON object at a given URL. Note this will not create a new node in history, it will overwrite the existing node.
  * TOnly those objects attributed to this application's RERUM registration agent can be overwritten.
- * @see /src/rerm/tokens/tiny.properties ACCESS_TOKEN entry for attribution
+ * @see /src/rerum/tokens/tiny.properties ACCESS_TOKEN entry for attribution
  * @param {type} form
  * @param {object} objIn An optional way to pass the new JSON representation as a parameter
  */

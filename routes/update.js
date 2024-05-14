@@ -1,22 +1,21 @@
 const express = require('express')
 const router = express.Router()
-const got = require('got')
 
 /* PUT an update to the thing. */
 router.put('/', async (req, res, next) => {
 
   try {
     // check body for JSON
-    JSON.stringify(req.body)
-    const updateBody = req.body
+    const body = JSON.stringify(req.body)
 
     // check for @id; any value is valid
-    if (!(updateBody['@id'] ?? updateBody.id)) {
+    if (!(req.body['@id'] ?? req.body.id)) {
       throw Error("No record id to update! (https://centerfordigitalhumanities.github.io/rerum_server/API.html#update)")
     }
 
     const updateOptions = {
-      json: updateBody,
+      method: 'PUT',
+      body,
       headers: {
         'user-agent': 'Tiny-Node',
         'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`, // not required for query
@@ -24,7 +23,7 @@ router.put('/', async (req, res, next) => {
       }
     }
     const updateURL = `${process.env.RERUM_API_ADDR}update`
-    const result = await got.put(updateURL, updateOptions).json()
+    const result = await fetch(updateURL, updateOptions).then(res=>res.json())
     res.status(200)
     res.send(result)
   }

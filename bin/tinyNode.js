@@ -3,7 +3,8 @@
 /**
  * Module dependencies.
  */
-
+const storedEnv = require('dotenv').config()
+require('dotenv-expand').expand(storedEnv)
 var app = require('../app');
 var debug = require('debug')('tinynode:server');
 var http = require('http');

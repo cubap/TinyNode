@@ -1,4 +1,3 @@
-require('dotenv').config()
 const fs = require('node:fs/promises')
 const { parse, stringify } = require('envfile')
 const sourcePath = '.env'

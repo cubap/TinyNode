@@ -144,17 +144,17 @@ async function create(form) {
             'Content-Type': 'application/json; charset=utf-8'
         }
     })
-        .then(response => {
-            if (response.ok) { return response.json() }
-            throw response
-        })
-        .then(resultObj => {
-            delete resultObj.new_obj_state
-            _customEvent("rerum-result", `Created new object at ${resultObj["@id"] ?? MISSING}.  See result below.`, resultObj)
-        })
-        .catch(err => {
-            _customEvent("rerum-error", "There was an error trying to create object", {}, err)
-        })
+    .then(response => {
+        if (response.ok) { return response.json() }
+        throw response
+    })
+    .then(resultObj => {
+        delete resultObj.new_obj_state
+        _customEvent("rerum-result", `Created new object at ${resultObj["@id"] ?? MISSING}.  See result below.`, resultObj)
+    })
+    .catch(err => {
+        _customEvent("rerum-error", "There was an error trying to create object", {}, err)
+    })
 }
 
 /**

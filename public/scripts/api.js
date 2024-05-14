@@ -88,18 +88,11 @@ async function importObj(form) {
 async function update(form, objIn) {
     let uri = form.getElementsByTagName("input")[0].value
     let obj
-    if (objIn !== undefined && typeof objIn === "object") {
-        obj = objIn
-    }
-    else {
-        obj = form.getElementsByTagName("textarea")[0].value
-        try {
-            obj = JSON.parse(obj)
-        }
-        catch (err) {
-            _customEvent("rerum-error", "You did not provide valid JSON", err)
-            return false
-        }
+    try {
+        obj = (typeof objIn === "object") ? objIn : JSON.parse(form.getElementsByTagName("textarea")[0].value)
+    } catch (err) {
+        _customEvent("rerum-error", "You did not provide valid JSON", {}, err)
+        return false
     }
     obj["@id"] = uri
     fetch(UPDATE_URL, {
@@ -109,22 +102,22 @@ async function update(form, objIn) {
             'Content-Type': 'application/json; charset=utf-8'
         }
     })
-        .then(response => {
-            if (response.ok) { return response.json() }
-            throw response
-        })
-        .then(resultObj => {
-            delete resultObj.new_obj_state
-            _customEvent("rerum-result", "Updated object with URI " + uri + ".  See resulting object below.", resultObj)
-        })
-        .catch(err => {
-            _customEvent("rerum-error", "There was an error trying to update object at " + url, {}, err)
-        })
+    .then(response => {
+        if (response.ok) { return response.json() }
+        throw response
+    })
+    .then(resultObj => {
+        delete resultObj.new_obj_state
+        _customEvent("rerum-result", "Updated object with URI " + uri + ".  See resulting object below.", resultObj)
+    })
+    .catch(err => {
+        _customEvent("rerum-error", "There was an error trying to update object at " + url, {}, err)
+    })
 }
 
 /**
  * Provide a JSON object to create in RERUM.  The resulting object is attributed to this application's RERUM registration agent.
- * @see /src/rerm/tokens/tiny.properties ACCESS_TOKEN entry for attribution
+ * @see /src/rerum/tokens/tiny.properties ACCESS_TOKEN entry for attribution
  * @param {type} form
  */
 async function create(form) {
@@ -206,17 +199,17 @@ async function overwrite(form, objIn) {
             'Content-Type': 'application/json; charset=utf-8'
         }
     })
-        .then(response => {
-            if (response.ok) { return response.json() }
-            throw response
-        })
-        .then(resultObj => {
-            delete resultObj.new_obj_state
-            _customEvent("rerum-result", `URI ${uri} overwritten. See resulting object below:`, resultObj)
-        })
-        .catch(err => {
-            _customEvent("rerum-error", "There was an error trying to overwrite object at " + uri, {}, err)
-        })
+    .then(response => {
+        if (response.ok) { return response.json() }
+        throw response
+    })
+    .then(resultObj => {
+        delete resultObj.new_obj_state
+        _customEvent("rerum-result", `URI ${uri} overwritten. See resulting object below:`, resultObj)
+    })
+    .catch(err => {
+        _customEvent("rerum-error", "There was an error trying to overwrite object at " + uri, {}, err)
+    })
 }
 
 const API = { query, import: importObj, update, create, delete: deleteObj, overwrite }

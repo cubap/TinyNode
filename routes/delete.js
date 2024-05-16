@@ -11,7 +11,7 @@ router.delete('/', async (req, res, next) => {
       body,
       method: 'DELETE',
       headers: {
-        'user-agent': 'Tiny-Node',
+        'user-agent': 'Tiny-Things/1.0',
         'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`,
         'Content-Type' : "application/json; charset=utf-8"
       }
@@ -36,11 +36,12 @@ router.delete('/:id', async (req, res, next) => {
     const deleteOptions = {
       method: 'DELETE',
       headers: {
-        'user-agent': 'Tiny-Node',
+        'user-agent': 'Tiny-Things/1.0',
         'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`,
       }
     }
     const result = await fetch(deleteURL, deleteOptions).then(res => res.text())
+    .catch(err=>next(err))
     res.status(204)
     res.send(result)
   }
@@ -48,6 +49,10 @@ router.delete('/:id', async (req, res, next) => {
     console.log(err)
     res.status(500).send("Caught Error:" + err)
   }
+})
+
+router.all('/', (req, res, next) => {
+  res.status(405).send("Method Not Allowed")
 })
 
 module.exports = router

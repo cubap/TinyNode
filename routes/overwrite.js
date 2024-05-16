@@ -17,13 +17,14 @@ router.put('/', async (req, res, next) => {
       method: 'PUT',
       body,
       headers: {
-        'user-agent': 'Tiny-Node',
+        'user-agent': 'Tiny-Things/1.0',
         'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`,
         'Content-Type' : "application/json;charset=utf-8"
       }
     }
     const overwriteURL = `${process.env.RERUM_API_ADDR}overwrite`
     const result = await fetch(overwriteURL, overwriteOptions).then(res=>res.json())
+    .catch(err=>next(err))
     res.status(200)
     res.send(result)
   }
@@ -31,6 +32,10 @@ router.put('/', async (req, res, next) => {
     console.log(err)
     res.status(500).send("Caught Error:" + err)
   }
+})
+
+router.all('/', (req, res, next) => {
+  res.status(405).send("Method Not Allowed")
 })
 
 module.exports = router

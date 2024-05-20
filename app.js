@@ -6,8 +6,6 @@ import { fileURLToPath } from "url"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 import logger from "morgan"
-import * as tokens from "./tokens.js"
-
 import indexRouter from "./routes/index.js"
 import queryRouter from "./routes/query.js"
 import createRouter from "./routes/create.js"
@@ -15,6 +13,10 @@ import updateRouter from "./routes/update.js"
 import deleteRouter from "./routes/delete.js"
 import overwriteRouter from "./routes/overwrite.js"
 import cors from "cors"
+import {updateExipredToken} from "./tokens.js"
+
+// Check for and update token on app start
+updateExipredToken()
 
 let app = express()
 

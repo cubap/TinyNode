@@ -1,3 +1,5 @@
+import dotenv from "dotenv"
+const storedEnv = dotenv.config()
 import fs from "node:fs/promises"
 import { parse, stringify } from "envfile"
 
@@ -43,7 +45,14 @@ async function generateNewAccessToken() {
  * This does not validate your access token, so you may still be rejected by 
  * your RERUM instance as unauthorized.
  */
-if (isTokenExpired(process.env.ACCESS_TOKEN)) {
-    console.log("Tiny Node detected an expired access token.  Updating the token now.")
-    generateNewAccessToken()
+function updateExipredToken() {
+    if (isTokenExpired(process.env.ACCESS_TOKEN)) {
+        console.log("TinyNode detected an expired access token.  Updating the token now.")
+        generateNewAccessToken()
+    }
+    else{
+        console.log("TinyNode token is up to date")
+    }
 }
+
+export {updateExipredToken}

@@ -7,6 +7,8 @@
 /**
  * Module dependencies.
  */
+const storedEnv = require('dotenv').config()
+require('dotenv-expand').expand(storedEnv)
 const jest = require('jest')
 const runCLI = require('jest-cli')
 //const defaults = require('../jest.config.js')

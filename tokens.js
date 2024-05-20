@@ -1,6 +1,7 @@
-require('dotenv').config()
-const fs = require('node:fs/promises')
-const { parse, stringify } = require('envfile')
+import dotenv from "dotenv"
+dotenv.config()
+import fs from "node:fs/promises"
+import { parse, stringify } from "envfile"
 const sourcePath = '.env'
 let expired = true
 

@@ -1,5 +1,5 @@
-const request = require("supertest")
-const app = require("../../app")
+import request from "supertest"
+import app from "../../app.js"
 
 describe("Test /create", () => {
   // TODO: This needs to be not creating new objects all the time.

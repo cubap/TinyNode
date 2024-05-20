@@ -7,25 +7,24 @@
 /**
  * Module dependencies.
  */
-const jest = require('jest')
-const runCLI = require('jest-cli')
-//const defaults = require('../jest.config.js')
-var app = require('../app')
-var http = require('http')
+import jest from "jest"
+import runCLI from "jest-cli"
+import app from "../app.js"
+import http from "http"
 
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort('3333')
+let port = normalizePort('3333')
 app.set('port', port)
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app)
+let server = http.createServer(app)
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -72,7 +71,7 @@ function onError(error) {
     throw error
   }
 
-  var bind = typeof port === 'string'
+  let bind = typeof port === 'string'
     ? 'Pipe ' + port
     : 'Port ' + port
 

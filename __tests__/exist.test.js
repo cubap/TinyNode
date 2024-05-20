@@ -1,7 +1,6 @@
-let request = require("supertest")
-
+import request from "supertest"
 //Fun fact, if you don't require app, you don't get coverage even though the tests run just fine.
-const app = require('../app')
+import app from "../app.js"
 
 it('/ -- Make sure index exists', function(done) {
   request(app)

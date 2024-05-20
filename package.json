@@ -1,14 +1,26 @@
 {
   "name": "tinynode",
+  "type": "module",
   "version": "0.1.1",
   "private": true,
+  "keywords": [
+      "rerum",
+      "nodejs",
+      "mongodb",
+      "TinyThings",
+      "TinyNode"
+   ],
+  "homepage": "https://tiny.rerum.io",
+  "license": "CC-BY",
+  "author": "Research Computing Group <research.computing@slu.edu> (https://slu.edu)",
+  "repository": "github:CenterForDigitalHumanities/tinyNode",
   "engines": {
     "node": ">=20.0.0"
   },
   "scripts": {
     "start": "node ./bin/tinyNode.js",
     "test": "jest",
-    "runtest": "node ./bin/testApp.js"
+    "runtest": "node --experimental-vm-modules ./bin/testApp.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

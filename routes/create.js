@@ -1,4 +1,4 @@
-const express = require('express')
+import express from "express"
 const router = express.Router()
 
 /* POST a create to the thing. */
@@ -33,4 +33,4 @@ router.all('/', (req, res, next) => {
   res.status(405).send("Method Not Allowed")
 })
 
-module.exports = router
+export default router

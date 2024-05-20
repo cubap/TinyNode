@@ -1,29 +1,31 @@
 #!/usr/bin/env node
-var createError = require('http-errors')
-var express = require('express')
-var path = require('path')
-var logger = require('morgan')
-var dotenv = require('dotenv')
-var dotenvExpand = require('dotenv-expand')
-var storedEnv = dotenv.config()
+import createError from "http-errors"
+import express from "express"
+import path from "path"
+import { fileURLToPath } from "url"
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+import logger from "morgan"
+import dotenv from "dotenv"
+import dotenvExpand from "dotenv-expand"
+const storedEnv = dotenv.config()
 dotenvExpand.expand(storedEnv)
+import * as tokens from "./tokens.js"
 
-require('./tokens.js')
+import indexRouter from "./routes/index.js"
+import queryRouter from "./routes/query.js"
+import createRouter from "./routes/create.js"
+import updateRouter from "./routes/update.js"
+import deleteRouter from "./routes/delete.js"
+import overwriteRouter from "./routes/overwrite.js"
+import cors from "cors"
 
-var indexRouter = require('./routes/index')
-var queryRouter = require('./routes/query')
-var createRouter = require('./routes/create')
-var updateRouter = require('./routes/update')
-var deleteRouter = require('./routes/delete')
-var overwriteRouter = require('./routes/overwrite')
-
-var app = express()
+let app = express()
 
 app.use(logger('dev'))
 app.use(express.json())
 if(process.env.OPEN_API_CORS !== "false") { 
   // This enables CORS for all requests. We may want to update this in the future and only apply to some routes.
-  const cors = require('cors')
   app.use(cors()) 
 }
 app.use(express.urlencoded({ extended: false }))
@@ -62,4 +64,4 @@ app.use(function(err, req, res, next) {
   res.send(err.message)
 })
 
-module.exports = app
+export default app

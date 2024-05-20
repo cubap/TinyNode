@@ -7,6 +7,10 @@
 /**
  * Module dependencies.
  */
+import dotenv from "dotenv"
+import dotenvExpand from "dotenv-expand"
+const storedEnv = dotenv.config()
+dotenvExpand.expand(storedEnv)
 import jest from "jest"
 import runCLI from "jest-cli"
 import app from "../app.js"

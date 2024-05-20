@@ -6,10 +6,6 @@ import { fileURLToPath } from "url"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 import logger from "morgan"
-import dotenv from "dotenv"
-import dotenvExpand from "dotenv-expand"
-const storedEnv = dotenv.config()
-dotenvExpand.expand(storedEnv)
 import * as tokens from "./tokens.js"
 
 import indexRouter from "./routes/index.js"

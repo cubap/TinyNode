@@ -4,10 +4,15 @@
  * Module dependencies.
  */
 
+import dotenv from "dotenv"
+import dotenvExpand from "dotenv-expand"
+const storedEnv = dotenv.config()
+dotenvExpand.expand(storedEnv)
 import app from "../app.js"
 import debug from 'debug'
 debug('tinynode:server')
 import http from "http"
+
 
 /**
  * Get port from environment and store in Express.

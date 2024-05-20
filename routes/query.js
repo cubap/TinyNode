@@ -19,13 +19,14 @@ router.post('/', async (req, res, next) => {
       method: 'POST',
       body,
       headers: {
-        'user-agent': 'Tiny-Node',
+        'user-agent': 'Tiny-Things/1.0',
         'Authorization': `Bearer ${process.env.RERUM_TOKEN}`, // not required for query
         'Content-Type' : "application/json;charset=utf-8"
       }
     }
     const queryURL = `${process.env.RERUM_API_ADDR}query?limit=${lim}&skip=${skip}`
     const results = await fetch(queryURL, queryOptions).then(res=>res.json())
+    .catch(err=>next(err))
     res.status(200)
     res.send(results)
   }
@@ -33,6 +34,10 @@ router.post('/', async (req, res, next) => {
     console.log(err)
     res.status(500).send("Caught " + err)
   }
+})
+
+router.all('/', (req, res, next) => {
+  res.status(405).send("Method Not Allowed")
 })
 
 module.exports = router

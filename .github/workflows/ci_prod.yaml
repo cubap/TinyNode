@@ -15,7 +15,7 @@ jobs:
         run: |
           cd /srv/node/tiny-node/
           git stash
-          git checkout main
+          git checkout $GITHUB_HEAD_REF
           git pull
           npm install
           npm run allTests

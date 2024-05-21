@@ -1,7 +1,7 @@
-name: TinyNode Dev Deploy on PR to main
+name: TinyNode Dev Deploy on push to release
 on:
-  pull_request:
-    branches: main
+  push:
+    branches: release
 jobs:
   merge-branch:
     runs-on: ubuntu-latest
@@ -12,7 +12,7 @@ jobs:
         with:
           type: now
           from_branch: main
-          target_branch: ${{ github.head_ref }}
+          target_branch: release
           github_token: ${{ secrets.BRY_PAT }}
           message: Merge main into this branch to deploy to dev for testing.
   test:
@@ -28,7 +28,7 @@ jobs:
         run: |
           cd /srv/node/tiny-node/
           git stash
-          git checkout main
+          git checkout release
           git pull
           npm install
           npm run allTests
@@ -53,6 +53,7 @@ jobs:
           cd /srv/node/tiny-node/
           pm2 stop tinyNode
           git stash
+          git checkout release
           git pull
           npm install
           pm2 start -i max bin/tinyNode.js

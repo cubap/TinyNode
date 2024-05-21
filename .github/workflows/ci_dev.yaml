@@ -1,4 +1,4 @@
-name: TinyNode end to end tests on PR to development
+name: TinyNode end to end tests on PR to release
 on:
   pull_request:
     branches: release
@@ -15,8 +15,8 @@ jobs:
         run: |
           cd /srv/node/tiny-node/
           git stash
-          git checkout main
+          git checkout $GITHUB_HEAD_REF
           git pull
           npm install
-          npm run allTests
+          npm run E2Etests
           

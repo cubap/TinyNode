@@ -38,6 +38,7 @@ jobs:
           cd /srv/node/tiny-node/
           pm2 stop tinyNode
           git stash
+          git checkout main
           git pull
           npm install
           pm2 start -i max bin/tinyNode.js

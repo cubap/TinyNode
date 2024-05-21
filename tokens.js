@@ -28,7 +28,7 @@ async function generateNewAccessToken() {
     try {
         const data = await fs.readFile('./.env', { encoding: 'utf8' })
         // Please note that this parse() will remove all #comments in the .env file.
-        let env_file_obj = parse(data)
+        const env_file_obj = parse(data)
         env_file_obj.ACCESS_TOKEN = tokenObject.access_token
         await fs.writeFile('./.env', stringify(env_file_obj))
         console.log("TinyNode now has an updated access token.")

@@ -19,6 +19,45 @@ describe("Combined unit tests for the '/overwrite ' route.", () => {
     expect(exists).toBe(true)
   })
 
+    // TODO: Can we avoid creating an object
+  it("Incorrect /overwrite route usage has expected RESTful responses.  #rest", () => {
+    request(routeTester)
+    .get("/overwrite")
+    .then(response => {
+      expect(response.statusCode).toBe(405)
+    })
+    .catch(err => err)
+
+    request(routeTester)
+    .post("/overwrite")
+    .then(response => {
+      expect(response.statusCode).toBe(405)
+    })
+    .catch(err => err)
+
+    request(routeTester)
+    .patch("/overwrite")
+    .then(response => {
+      expect(response.statusCode).toBe(405)
+    })
+    .catch(err => err)
+
+    request(routeTester)
+    .delete("/overwrite")
+    .then(response => {
+      expect(response.statusCode).toBe(405)
+    })
+    .catch(err => err)
+
+    request(routeTester)
+    .put("/overwrite")
+    .send("not json")
+    .then(response => {
+      expect(response.statusCode).toBe(400)
+    })
+    .catch(err => err)
+  })
+
   // TODO: Test overwrite capabilities
   it.skip("Can overwrite the RERUM test obj using the app's /overwrite endpoint.  #e2e", () => {
     expect(true).toBe(true)

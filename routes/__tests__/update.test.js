@@ -19,6 +19,45 @@ describe("Combined unit tests for the '/update' route.", () => {
     expect(exists).toBe(true)
   })
 
+    // TODO: Can we avoid creating an object
+  it("Incorrect /update route usage has expected RESTful responses.  #rest", () => {
+    request(routeTester)
+    .get("/update")
+    .then(response => {
+      expect(response.statusCode).toBe(405)
+    })
+    .catch(err => err)
+
+    request(routeTester)
+    .post("/update")
+    .then(response => {
+      expect(response.statusCode).toBe(405)
+    })
+    .catch(err => err)
+
+    request(routeTester)
+    .patch("/update")
+    .then(response => {
+      expect(response.statusCode).toBe(405)
+    })
+    .catch(err => err)
+
+    request(routeTester)
+    .delete("/update")
+    .then(response => {
+      expect(response.statusCode).toBe(405)
+    })
+    .catch(err => err)
+
+    request(routeTester)
+    .put("/update")
+    .send("not json")
+    .then(response => {
+      expect(response.statusCode).toBe(400)
+    })
+    .catch(err => err)
+  })
+
   // TODO: Can we avoid updating the RERUM test obj?
   it("Can update the RERUM test obj using the app's /update endpoint.  #e2e", () => {
     request(routeTester)

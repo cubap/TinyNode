@@ -20,6 +20,45 @@ describe("Combined unit tests for the '/create' route.", () => {
   })
 
   // TODO: Can we avoid creating an object
+  it("Incorrect /create route usage has expected RESTful responses.  #rest", () => {
+    request(routeTester)
+    .get("/create")
+    .then(response => {
+      expect(response.statusCode).toBe(405)
+    })
+    .catch(err => err)
+
+    request(routeTester)
+    .put("/create")
+    .then(response => {
+      expect(response.statusCode).toBe(405)
+    })
+    .catch(err => err)
+
+    request(routeTester)
+    .patch("/create")
+    .then(response => {
+      expect(response.statusCode).toBe(405)
+    })
+    .catch(err => err)
+
+    request(routeTester)
+    .delete("/create")
+    .then(response => {
+      expect(response.statusCode).toBe(405)
+    })
+    .catch(err => err)
+
+    request(routeTester)
+    .post("/create")
+    .send("not json")
+    .then(response => {
+      expect(response.statusCode).toBe(400)
+    })
+    .catch(err => err)
+  })
+
+  // TODO: Can we avoid creating an object
   it("/create route can save an object to RERUM.  #e2e", () => {
     request(routeTester)
     .post("/create")

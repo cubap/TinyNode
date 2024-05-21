@@ -19,6 +19,45 @@ describe("Combined unit tests for the '/query' route.", () => {
     expect(exists).toBe(true)
   })
 
+    // TODO: Can we avoid creating an object
+  it("Incorrect /query route usage has expected RESTful responses.  #rest", () => {
+    request(routeTester)
+    .get("/query")
+    .then(response => {
+      expect(response.statusCode).toBe(405)
+    })
+    .catch(err => err)
+
+    request(routeTester)
+    .put("/query")
+    .then(response => {
+      expect(response.statusCode).toBe(405)
+    })
+    .catch(err => err)
+
+    request(routeTester)
+    .patch("/query")
+    .then(response => {
+      expect(response.statusCode).toBe(405)
+    })
+    .catch(err => err)
+
+    request(routeTester)
+    .delete("/query")
+    .then(response => {
+      expect(response.statusCode).toBe(405)
+    })
+    .catch(err => err)
+
+    request(routeTester)
+    .post("/query")
+    .send("not json")
+    .then(response => {
+      expect(response.statusCode).toBe(400)
+    })
+    .catch(err => err)
+  })
+
   it("Can query for objects in RERUM using the app's /query endpoint.  #e2e", () => {
     request(routeTester)
     .post("/query")

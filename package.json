@@ -19,8 +19,9 @@
   },
   "scripts": {
     "start": "node ./bin/tinyNode.js",
-    "test": "jest",
-    "runtest": "node --experimental-vm-modules ./bin/testApp.js"
+    "allTests": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "E2Etests": "node --experimental-vm-modules node_modules/jest/bin/jest.js -t e2e ",
+    "existsTests": "node --experimental-vm-modules node_modules/jest/bin/jest.js -t exists_unit "
   },
   "dependencies": {
     "cors": "^2.8.5",

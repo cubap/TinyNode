@@ -1,0 +1,22 @@
+name: TinyNode end to end tests on PR to development
+on:
+  pull_request:
+    branches: release
+jobs:
+  test:
+    strategy:
+      matrix:
+        machines:
+          - vlcdhp02
+    runs-on: ${{ matrix.machines }}
+    steps:
+      - uses: actions/checkout@master
+      - name: Test the app on the server
+        run: |
+          cd /srv/node/tiny-node/
+          git stash
+          git checkout main
+          git pull
+          npm install
+          npm run allTests
+          

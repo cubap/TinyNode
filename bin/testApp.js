@@ -22,14 +22,14 @@ import http from "http"
  * Get port from environment and store in Express.
  */
 
-let port = normalizePort('3333')
+const port = normalizePort('3333')
 app.set('port', port)
 
 /**
  * Create HTTP server.
  */
 
-let server = http.createServer(app)
+const server = http.createServer(app)
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -76,7 +76,7 @@ function onError(error) {
     throw error
   }
 
-  let bind = typeof port === 'string'
+  const bind = typeof port === 'string'
     ? 'Pipe ' + port
     : 'Port ' + port
 

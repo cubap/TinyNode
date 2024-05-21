@@ -4,7 +4,6 @@ import fs from "node:fs/promises"
 import { parse, stringify } from "envfile"
 
 const sourcePath = '.env'
-let expired = true
 
 // https://stackoverflow.com/a/69058154/1413302
 const isTokenExpired = (token) => (Date.now() >= JSON.parse(Buffer.from(token.split('.')[1], 'base64').toString()).exp * 1000)
@@ -45,7 +44,7 @@ async function generateNewAccessToken() {
  * This does not validate your access token, so you may still be rejected by 
  * your RERUM instance as unauthorized.
  */
-function updateExipredToken() {
+function updateExpiredToken () {
     if (isTokenExpired(process.env.ACCESS_TOKEN)) {
         console.log("TinyNode detected an expired access token.  Updating the token now.")
         generateNewAccessToken()
@@ -55,4 +54,4 @@ function updateExipredToken() {
     }
 }
 
-export {updateExipredToken}
+export {updateExpiredToken}

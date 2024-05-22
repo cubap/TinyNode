@@ -1,3 +1,7 @@
+/**
+ * Test the app index and make sure it what we expect.
+ */ 
+
 import express from "express"
 import request from "supertest"
 import indexRoute from "../index.js"

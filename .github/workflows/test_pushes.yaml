@@ -41,5 +41,5 @@ jobs:
           git checkout $GITHUB_REF
           git pull
           npm install
-          npm run functionalTests
+          npm run coreTests
           

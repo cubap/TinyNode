@@ -7,7 +7,7 @@ const routeTester = new express()
 routeTester.use("/query", queryRoute)
 
 describe("Combined unit tests for the '/query' route.", () => {
-  it("'/app/query' and '/query' are registered routes in the app.  #exists", () => {
+  it("'/app/query' and '/query' are registered routes in the app.  __exists __core ", () => {
     let exists = false
     let count = 0
     const stack = app._router.stack
@@ -27,7 +27,7 @@ describe("Combined unit tests for the '/query' route.", () => {
   })
 
     // TODO: Can we avoid creating an object
-  it("Incorrect '/app/query' route usage has expected RESTful responses.  #rest_functions", () => {
+  it("Incorrect '/app/query' route usage has expected RESTful responses.  __rest __core", () => {
     request(routeTester)
     .get("/app/query")
     .then(response => {
@@ -65,7 +65,7 @@ describe("Combined unit tests for the '/query' route.", () => {
     .catch(err => err)
   })
 
-  it("Can query for objects in RERUM using the app's '/app/query' route.  #e2e", () => {
+  it("Can query for objects in RERUM using the app's '/app/query' route.  __e2e", () => {
     request(routeTester)
     .post("/app/query")
     .send({
@@ -80,7 +80,7 @@ describe("Combined unit tests for the '/query' route.", () => {
   })
 
   // TODO: Can we avoid creating an object
-  it("Incorrect '/query' route usage has expected RESTful responses.  #rest_functions", () => {
+  it("Incorrect '/query' route usage has expected RESTful responses.  __rest __core", () => {
     request(routeTester)
     .get("/query")
     .then(response => {
@@ -118,7 +118,7 @@ describe("Combined unit tests for the '/query' route.", () => {
     .catch(err => err)
   })
 
-  it("Can query for objects in RERUM using the app's '/query' route.  #e2e", () => {
+  it("Can query for objects in RERUM using the app's '/query' route.  __e2e", () => {
     request(routeTester)
     .post("/query")
     .send({

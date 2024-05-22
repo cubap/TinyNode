@@ -7,7 +7,7 @@ const routeTester = new express()
 routeTester.use("/create", createRoute)
 
 describe("Combined unit tests for the '/create' route.", () => {
-  it("'/app/create' and '/create' are registered routes in the app.  #exists", () => {
+  it("'/app/create' and '/create' are registered routes in the app.  __exists __core", () => {
     let exists = false
     let count = 0
     const stack = app._router.stack
@@ -27,7 +27,7 @@ describe("Combined unit tests for the '/create' route.", () => {
   })
 
     // TODO: Can we avoid creating an object
-  it("Incorrect '/app/create' route usage has expected RESTful responses.  #rest_functions", () => {
+  it("Incorrect '/app/create' route usage has expected RESTful responses.  __rest __core", () => {
     request(routeTester)
     .get("/app/create")
     .then(response => {
@@ -66,7 +66,7 @@ describe("Combined unit tests for the '/create' route.", () => {
   })
 
   // TODO: Can we avoid creating an object
-  it("'/app/create' route can save an object to RERUM.  #e2e", () => {
+  it("'/app/create' route can save an object to RERUM.  __e2e", () => {
     request(routeTester)
     .post("/app/create")
     .send({"test":"item"})
@@ -79,7 +79,7 @@ describe("Combined unit tests for the '/create' route.", () => {
   })
 
   // TODO: Can we avoid creating an object
-  it("Incorrect '/create' route usage has expected RESTful responses.  #rest_functions", () => {
+  it("Incorrect '/create' route usage has expected RESTful responses.  __rest __core", () => {
     request(routeTester)
     .get("/create")
     .then(response => {
@@ -118,7 +118,7 @@ describe("Combined unit tests for the '/create' route.", () => {
   })
 
   // TODO: Can we avoid creating an object
-  it("'/create' route can save an object to RERUM.  #e2e", () => {
+  it("'/create' route can save an object to RERUM.  __e2e", () => {
     request(routeTester)
     .post("/create")
     .send({"test":"item"})

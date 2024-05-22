@@ -7,7 +7,7 @@ const routeTester = new express()
 routeTester.use("/overwrite ", overwriteRoute)
 
 describe("Combined unit tests for the '/overwrite ' route.", () => {
-  it("'/app/overwrite' and '/overwrite' are registered routes in the app.  #exists", () => {
+  it("'/app/overwrite' and '/overwrite' are registered routes in the app.  __exists __core", () => {
     let exists = false
     let count = 0
     const stack = app._router.stack
@@ -27,7 +27,7 @@ describe("Combined unit tests for the '/overwrite ' route.", () => {
   })
 
   // TODO: Can we avoid creating an object
-  it("Incorrect '/app/overwrite' route usage has expected RESTful responses.  #rest_functions", () => {
+  it("Incorrect '/app/overwrite' route usage has expected RESTful responses.  __rest __core", () => {
     request(routeTester)
     .get("/app/overwrite")
     .then(response => {
@@ -66,7 +66,7 @@ describe("Combined unit tests for the '/overwrite ' route.", () => {
   })
 
   // TODO: Test overwrite capabilities
-  it.skip("Can overwrite the RERUM test obj using the app's '/app/overwrite' route.  #e2e", () => {
+  it.skip("Can overwrite the RERUM test obj using the app's '/app/overwrite' route.  __e2e", () => {
     expect(true).toBe(true)
     // request(routeTester)
     // .put("/app/overwrite ")
@@ -83,7 +83,7 @@ describe("Combined unit tests for the '/overwrite ' route.", () => {
   })
 
   // TODO: Can we avoid creating an object
-  it("Incorrect '/overwrite' route usage has expected RESTful responses.  #rest_functions", () => {
+  it("Incorrect '/overwrite' route usage has expected RESTful responses.  __rest __core", () => {
     request(routeTester)
     .get("/overwrite")
     .then(response => {
@@ -122,7 +122,7 @@ describe("Combined unit tests for the '/overwrite ' route.", () => {
   })
 
   // TODO: Test overwrite capabilities
-  it.skip("Can overwrite the RERUM test obj using the app's '/overwrite' route.  #e2e", () => {
+  it.skip("Can overwrite the RERUM test obj using the app's '/overwrite' route.  __e2e", () => {
     expect(true).toBe(true)
     // request(routeTester)
     // .put("/overwrite ")

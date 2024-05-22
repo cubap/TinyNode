@@ -7,7 +7,7 @@ const routeTester = new express()
 routeTester.use("/delete", deleteRoute)
 
 describe("Combined unit tests for the '/delete' route.", () => {
-  it("'/app/delete' and '/delete' are registered routes in the app.  #exists", () => {
+  it("'/app/delete' and '/delete' are registered routes in the app.  __exists __core", () => {
     let exists = false
     let count = 0
     const stack = app._router.stack
@@ -27,7 +27,7 @@ describe("Combined unit tests for the '/delete' route.", () => {
   })
 
   // TODO: Can we avoid creating an object
-  it("Incorrect '/app/delete' route usage has expected RESTful responses.  #rest_functions", () => {
+  it("Incorrect '/app/delete' route usage has expected RESTful responses.  __rest __core", () => {
     request(routeTester)
     .get("/app/delete")
     .then(response => {
@@ -65,7 +65,7 @@ describe("Combined unit tests for the '/delete' route.", () => {
   })
 
   // TODO: Test delete capabilities.
-  it.skip("'/app/delete' route can delete an object in RERUM.  #e2e", () => {
+  it.skip("'/app/delete' route can delete an object in RERUM.  __e2e", () => {
     expect(true).toBe(true)
     // request(routeTester)
     // .delete("/app/delete/00000")
@@ -78,7 +78,7 @@ describe("Combined unit tests for the '/delete' route.", () => {
   })
 
   // TODO: Can we avoid creating an object
-  it("Incorrect '/delete' route usage has expected RESTful responses.  #rest_functions", () => {
+  it("Incorrect '/delete' route usage has expected RESTful responses.  __rest __core", () => {
     request(routeTester)
     .get("/delete")
     .then(response => {
@@ -116,7 +116,7 @@ describe("Combined unit tests for the '/delete' route.", () => {
   })
 
   // TODO: Test delete capabilities.
-  it.skip("'/delete' route can delete an object in RERUM.  #e2e", () => {
+  it.skip("'/delete' route can delete an object in RERUM.  __e2e", () => {
     expect(true).toBe(true)
     // request(routeTester)
     // .delete("/delete/00000")

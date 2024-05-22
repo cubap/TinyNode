@@ -7,7 +7,7 @@ const routeTester = new express()
 routeTester.use("/update", updateRoute)
 
 describe("Combined unit tests for the '/update' route.", () => {
-  it("'/app/update' and '/update' are registered routes in the app.  #exists", () => {
+  it("'/app/update' and '/update' are registered routes in the app.  __exists __core", () => {
     let exists = false
     let count = 0
     const stack = app._router.stack
@@ -27,7 +27,7 @@ describe("Combined unit tests for the '/update' route.", () => {
   })
 
   // TODO: Can we avoid creating an object
-  it("Incorrect '/app/update' route usage has expected RESTful responses.  #rest_functions", () => {
+  it("Incorrect '/app/update' route usage has expected RESTful responses.  __rest __core", () => {
     request(routeTester)
     .get("/app/update")
     .then(response => {
@@ -66,7 +66,7 @@ describe("Combined unit tests for the '/update' route.", () => {
   })
 
   // TODO: Can we avoid updating the RERUM test obj?
-  it("Can update the RERUM test obj using the app's '/app/update' route.  #e2e", () => {
+  it("Can update the RERUM test obj using the app's '/app/update' route.  __e2e", () => {
     request(routeTester)
     .put("/app/update")
     .send({
@@ -82,7 +82,7 @@ describe("Combined unit tests for the '/update' route.", () => {
   })
 
   // TODO: Can we avoid creating an object
-  it("Incorrect '/update' route usage has expected RESTful responses.  #rest_functions", () => {
+  it("Incorrect '/update' route usage has expected RESTful responses.  __rest __core", () => {
     request(routeTester)
     .get("/update")
     .then(response => {
@@ -121,7 +121,7 @@ describe("Combined unit tests for the '/update' route.", () => {
   })
 
   // TODO: Can we avoid updating the RERUM test obj?
-  it("Can update the RERUM test obj using the app's '/update' route.  #e2e", () => {
+  it("Can update the RERUM test obj using the app's '/update' route.  __e2e", () => {
     request(routeTester)
     .put("/update")
     .send({

@@ -14,7 +14,7 @@ jobs:
           from_branch: release
           target_branch: deepfakemain
           github_token: ${{ secrets.BRY_PAT }}
-          message: Merge main into this branch to deploy to dev for testing.
+          message: Merge deepfakemain into this branch to deploy to dev for testing.
   test:
     needs: merge-branch
     strategy:

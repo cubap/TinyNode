@@ -21,7 +21,8 @@
     "start": "node ./bin/tinyNode.js",
     "allTests": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "E2Etests": "node --experimental-vm-modules node_modules/jest/bin/jest.js -t e2e ",
-    "existsTests": "node --experimental-vm-modules node_modules/jest/bin/jest.js -t exists_unit "
+    "existsTests": "node --experimental-vm-modules node_modules/jest/bin/jest.js -t exists ",
+    "functionalTests": "node --experimental-vm-modules node_modules/jest/bin/jest.js -t exists "
   },
   "dependencies": {
     "cors": "^2.8.5",

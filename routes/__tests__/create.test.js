@@ -27,7 +27,7 @@ describe("Combined unit tests for the '/create' route.", () => {
   })
 
     // TODO: Can we avoid creating an object
-  it("Incorrect '/app/create' route usage has expected RESTful responses.  #rest", () => {
+  it("Incorrect '/app/create' route usage has expected RESTful responses.  #rest_functions", () => {
     request(routeTester)
     .get("/app/create")
     .then(response => {
@@ -79,7 +79,7 @@ describe("Combined unit tests for the '/create' route.", () => {
   })
 
   // TODO: Can we avoid creating an object
-  it("Incorrect '/create' route usage has expected RESTful responses.  #rest", () => {
+  it("Incorrect '/create' route usage has expected RESTful responses.  #rest_functions", () => {
     request(routeTester)
     .get("/create")
     .then(response => {

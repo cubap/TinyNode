@@ -1,7 +1,7 @@
-name: TinyNode end to end tests on PR to main
+name: TinyNode end to end tests on PR to release
 on:
   pull_request:
-    branches: main
+    branches: release
 jobs:
   test:
     strategy:
@@ -18,5 +18,5 @@ jobs:
           git checkout $GITHUB_HEAD_REF
           git pull
           npm install
-          npm run allTests
+          npm run E2Etests
           

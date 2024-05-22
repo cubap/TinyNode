@@ -1,7 +1,7 @@
-name: TinyNode production deploy on push to main.
+name: TinyNode production deploy on push to release.
 on:
   push:
-    branches: main
+    branches: release
 jobs:
   test:
     strategy:
@@ -15,7 +15,7 @@ jobs:
         run: |
           cd /srv/node/tiny-node/
           git stash
-          git checkout main
+          git checkout release
           git pull
           npm install
           npm run allTests
@@ -38,7 +38,7 @@ jobs:
           cd /srv/node/tiny-node/
           pm2 stop tinyNode
           git stash
-          git checkout main
+          git checkout release
           git pull
           npm install
           pm2 start -i max bin/tinyNode.js

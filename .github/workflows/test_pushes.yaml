@@ -37,6 +37,7 @@ jobs:
         run: |
           cd /srv/node/tiny-node/
           git stash
+          git pull
           git checkout $GITHUB_REF
           git pull
           npm install

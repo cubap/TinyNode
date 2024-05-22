@@ -7,11 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Merge with main
+      - name: Merge with release
         uses: devmasx/merge-branch@master
         with:
           type: now
-          from_branch: main
+          from_branch: release
           target_branch: deepfakemain
           github_token: ${{ secrets.BRY_PAT }}
           message: Merge main into this branch to deploy to dev for testing.

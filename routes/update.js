@@ -8,7 +8,7 @@ router.put('/', async (req, res, next) => {
     // check body for JSON
     const body = JSON.stringify(req.body)
 
-    // check for at-id -- any value is valid
+    // check for @id in body.  Any value is valid.  Lack of value is a bad request.
     if (!req?.body || !(req.body['@id'] ?? req.body.id)) {
       res.status(400).send("No record id to update! (https://centerfordigitalhumanities.github.io/rerum_server/API.html#update)")
     }

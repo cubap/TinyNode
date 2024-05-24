@@ -100,8 +100,8 @@ describe("Check that the request/response behavior of the TinyNode create route 
  *  - Incorrect HTTP method
  *  - Invalid JSON body
  */ 
-describe("Check that incorrect TinyNode create route usage results in expected RESTful responses from RERUM.", () => {
-  it("Incorrect '/app/create' route usage has expected RESTful responses.  __rest __core", async () => {
+describe("Check that incorrect TinyNode create route usage results in expected RESTful responses from RERUM.  __rest __core", () => {
+  it("Incorrect '/app/create' route usage has expected RESTful responses.", async () => {
     let response = null
     // Wrong Method
     response = await request(routeTester)
@@ -144,7 +144,7 @@ describe("Check that incorrect TinyNode create route usage results in expected R
     expect(response.statusCode).toBe(400)
   })
 
-  it("Incorrect '/create' route usage has expected RESTful responses.  __rest __core", async () => {
+  it("Incorrect '/create' route usage has expected RESTful responses.", async () => {
     let response = null
 
     response = await request(routeTester)
@@ -192,8 +192,8 @@ describe("Check that incorrect TinyNode create route usage results in expected R
  * Full integration test.  Checks the TinyNode app create endpoint functionality and RERUM connection.
  * 
  */
-describe("Check that the properly used create endpoints function and interact with RERUM.", () => {
-  it("'/app/create' route can save an object to RERUM.  __e2e", async () => {
+describe("Check that the properly used create endpoints function and interact with RERUM.  __e2e", () => {
+  it("'/app/create' route can save an object to RERUM.", async () => {
     const response = await request(routeTester)
       .post("/app/create")
       .send({ "test": "item" })
@@ -205,7 +205,7 @@ describe("Check that the properly used create endpoints function and interact wi
     expect(response.body.test).toBe("item")
   })
 
-  it("'/create' route can save an object to RERUM.  __e2e", async () => {
+  it("'/create' route can save an object to RERUM.", async () => {
     const response = await request(routeTester)
       .post("/create")
       .send({ "test": "item" })

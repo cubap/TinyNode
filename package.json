@@ -23,7 +23,7 @@
     "E2Etests": "node --experimental-vm-modules node_modules/jest/bin/jest.js -t __e2e ",
     "existsTests": "node --experimental-vm-modules node_modules/jest/bin/jest.js -t __exists ",
     "coreTests": "node --experimental-vm-modules node_modules/jest/bin/jest.js -t __core ",
-    "mocks": "node --experimental-vm-modules node_modules/jest/bin/jest.js -t __mockit "
+    "functionalTests": "node --experimental-vm-modules node_modules/jest/bin/jest.js -t __mock_functions "
   },
   "dependencies": {
     "cors": "^2.8.5",

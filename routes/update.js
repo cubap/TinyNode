@@ -8,9 +8,9 @@ router.put('/', async (req, res, next) => {
     // check body for JSON
     const body = JSON.stringify(req.body)
 
-    // check for @id; any value is valid
-    if (!(req.body['@id'] ?? req.body.id)) {
-      throw Error("No record id to update! (https://centerfordigitalhumanities.github.io/rerum_server/API.html#update)")
+    // check for at-id -- any value is valid
+    if (!req?.body || !(req.body['@id'] ?? req.body.id)) {
+      res.status(400).send("No record id to update! (https://centerfordigitalhumanities.github.io/rerum_server/API.html#update)")
     }
 
     const updateOptions = {

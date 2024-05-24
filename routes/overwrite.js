@@ -10,7 +10,7 @@ router.put('/', async (req, res, next) => {
 
     // check for @id in body.  Any value is valid.  Lack of value is a bad request.
     if (!req?.body || !(req.body['@id'] ?? req.body.id)) {
-      res.status(400).send("No record id to update! (https://centerfordigitalhumanities.github.io/rerum_server/API.html#update)")
+      res.status(400).send("No record id to overwrite! (https://centerfordigitalhumanities.github.io/rerum_server/API.html#overwrite)")
     }
 
     const overwriteOptions = {

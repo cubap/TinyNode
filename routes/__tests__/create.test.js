@@ -9,6 +9,31 @@ routeTester.use(express.urlencoded({ extended: false }))
 routeTester.use("/create", createRoute)
 routeTester.use("/app/create", createRoute)
 
+/**
+ * This test suite uses the built app.js app and checks that the expected create endpoints are registered.
+ *  - /create
+ *  - /app/create
+ */
+describe("Check that the expected TinyNode create route patterns are registered.", () => {
+  it("'/app/create' and '/create' are registered routes in the app.  __exists __core", () => {
+    let exists = false
+    let count = 0
+    const stack = app._router.stack
+    for (const middleware of stack) {
+      if (middleware.regexp && middleware.regexp.toString().includes("/app/create")) {
+        count++
+      } else if (middleware.regexp && middleware.regexp.toString().includes("/create")) {
+        count++
+      }
+      if (count === 2) {
+        exists = true
+        break
+      }
+    }
+    expect(exists).toBe(true)
+  })
+})
+
 
 /**
  * This test suite runs the logic of the route file 'create.js' but does not actually communicate with RERUM.
@@ -44,34 +69,37 @@ describe("Check that the request/response behavior of the TinyNode create route 
     expect(response.statusCode).toBe(201)
     expect(response.body.test).toBe("item")
   })
-})
 
+  it("'/app/create' route request and response behavior is functioning.", async () => {
 
-/**
- * This test suite uses the built app.js app and checks that the expected create endpoints are registered.
- *  - /create
- *  - /app/create
- */
-describe("Check that the expected TinyNode create route patterns are registered.", () => {
-  it("'/app/create' and '/create' are registered routes in the app.  __exists __core", () => {
-    let exists = false
-    let count = 0
-    const stack = app._router.stack
-    for (const middleware of stack) {
-      if (middleware.regexp && middleware.regexp.toString().includes("/app/create")) {
-        count++
-      } else if (middleware.regexp && middleware.regexp.toString().includes("/create")) {
-        count++
-      }
-      if (count === 2) {
-        exists = true
-        break
-      }
-    }
-    expect(exists).toBe(true)
+    /** 
+     * Request/Response Mock Using manual fetch replacement
+     * This is overruling the fetch(store.rerum.io/v1/api/create) call in create.js
+     */
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve({ "@id": "https://devstore.rerum.io/v1/id/_not_", "test": "item", "__rerum": { "stuff": "here" } })
+      })
+    )
+
+    const response = await request(routeTester)
+      .post("/app/create")
+      .send({ "test": "item" })
+      .set("Content-Type", "application/json")
+      .then(resp => resp)
+      .catch(err => err)
+    expect(response.header).toHaveProperty('location')
+    expect(response.statusCode).toBe(201)
+    expect(response.body.test).toBe("item")
   })
 })
 
+/**
+ * This test suite checks the RESTful responses when using the TinyNode create endpoint incorrectly.
+ *
+ *  - Incorrect HTTP method
+ *  - Invalid JSON body
+ */ 
 describe("Check that incorrect TinyNode create route usage results in expected RESTful responses from RERUM.", () => {
   it("Incorrect '/app/create' route usage has expected RESTful responses.  __rest __core", async () => {
     let response = null
@@ -161,7 +189,8 @@ describe("Check that incorrect TinyNode create route usage results in expected R
 })
 
 /**
- * Full integration test.  Checks the TinyNode app functionality and RERUM connection.
+ * Full integration test.  Checks the TinyNode app create endpoint functionality and RERUM connection.
+ * 
  */
 describe("Check that the properly used create endpoints function and interact with RERUM.", () => {
   it("'/app/create' route can save an object to RERUM.  __e2e", async () => {

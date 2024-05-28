@@ -1,5 +1,4 @@
 import request from "supertest"
-//Fun fact, if you don't require app, you don't get coverage even though the tests run just fine.
 import app from "../../app.js"
 
 describe("Make sure TinyNode demo interface is present.  __core", () => {

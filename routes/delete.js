@@ -23,8 +23,7 @@ router.delete('/', async (req, res, next) => {
     res.send(result)
   }
   catch (err) {
-    console.log(err)
-    res.status(500).send("Caught Error:" + err)
+    next(err)
   }
 })
 
@@ -46,8 +45,7 @@ router.delete('/:id', async (req, res, next) => {
     res.send(result)
   }
   catch (err) {
-    console.log(err)
-    res.status(500).send("Caught Error:" + err)
+    next(err)
   }
 })
 

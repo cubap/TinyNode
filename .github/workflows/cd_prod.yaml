@@ -1,4 +1,3 @@
-#https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#release
 name: TinyNode production deploy on push to release.
 on:
   push:

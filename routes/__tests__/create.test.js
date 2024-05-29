@@ -68,25 +68,14 @@ describe("Check that the expected TinyNode create route patterns are registered.
  *   - Does the route respond 201
  *   - Does the route respond with the object that was in the request body
  *   - Does the route respond with the proper 'Location' header
+ * 
+ * Note: /app/create uses the same logic and would be a redundant test.
  */
 describe("Check that the request/response behavior of the TinyNode create route functions.  Mock the connection to RERUM.  __mock_functions", () => {
   it("'/create' route request and response behavior is functioning.", async () => {
 
     const response = await request(routeTester)
       .post("/create")
-      .send({ "test": "item" })
-      .set("Content-Type", "application/json")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.header.location).toBe(rerum_uri)
-    expect(response.statusCode).toBe(201)
-    expect(response.body.test).toBe("item")
-  })
-
-  it("'/app/create' route request and response behavior is functioning.", async () => {
-
-    const response = await request(routeTester)
-      .post("/app/create")
       .send({ "test": "item" })
       .set("Content-Type", "application/json")
       .then(resp => resp)
@@ -102,45 +91,10 @@ describe("Check that the request/response behavior of the TinyNode create route 
  *
  *  - Incorrect HTTP method
  *  - Invalid JSON body
+ * 
+ * Note: /app/create uses the same logic and would be a redundant test
  */
 describe("Check that incorrect TinyNode create route usage results in expected RESTful responses from RERUM.  __rest __core", () => {
-  it("Incorrect '/app/create' route usage has expected RESTful responses.", async () => {
-    let response = null
-    // Wrong Method
-    response = await request(routeTester)
-      .get("/app/create")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(405)
-
-    response = await request(routeTester)
-      .put("/app/create")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(405)
-
-    response = await request(routeTester)
-      .patch("/app/create")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(405)
-
-    response = await request(routeTester)
-      .delete("/app/create")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(405)
-
-    // Bad request body
-    response = await request(routeTester)
-      .post("/app/create")
-      .set("Content-Type", "application/json")
-      .send("not json")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(400)
-  })
-
   it("Incorrect '/create' route usage has expected RESTful responses.", async () => {
     let response = null
 
@@ -181,7 +135,8 @@ describe("Check that incorrect TinyNode create route usage results in expected R
 
 /**
  * Full integration test.  Checks the TinyNode app create endpoint functionality and RERUM connection.
- * Note this endpoint also has the '/app/create' alias.
+ * 
+ * Note: /app/create uses the same logic and would be a redundant test
  */
 describe("Check that the properly used create endpoints function and interact with RERUM.  __e2e", () => {
   it("'/create' route can save an object to RERUM.", async () => {

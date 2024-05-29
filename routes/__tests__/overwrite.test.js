@@ -66,35 +66,13 @@ describe("Check that the expected TinyNode overwrite route patterns are register
  *   - Does the route respond 200
  *   - Does the route respond with the object that was in the request body
  *   - Does the route respond with the proper 'Location' header
+ * 
+ * Note: /app/overwrite uses the same logic and would be a redundant test.
  */
 describe("Check that the request/response behavior of the TinyNode overwrite route functions.  Mock the connection to RERUM.  __mock_functions", () => {
   it("'/overwrite' route request and response behavior is functioning.", async () => {
     const response = await request(routeTester)
       .put("/overwrite")
-      .send({ "@id": rerum_tiny_test_obj_id, "testing": "item" })
-      .set("Content-Type", "application/json")
-      .then(resp => resp)
-      .catch(err => err)
-    //FIXME to uncomment these: https://github.com/CenterForDigitalHumanities/TinyNode/issues/88
-    //expect(response.header.location).toBe(rerum_tiny_test_obj_id)
-    expect(response.statusCode).toBe(200)
-    expect(response.body.testing).toBe("item")
-  })
-
-  it("'/app/overwrite' route request and response behavior is functioning.", async () => {
-
-    /** 
-     * Request/Response Mock Using manual fetch replacement
-     * This is overruling the fetch(store.rerum.io/v1/api/overwrite) call in overwrite.js
-     */
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        json: () => Promise.resolve({ "@id": rerum_tiny_test_obj_id, "testing": "item", "__rerum": { "stuff": "here" } })
-      })
-    )
-
-    const response = await request(routeTester)
-      .put("/app/overwrite")
       .send({ "@id": rerum_tiny_test_obj_id, "testing": "item" })
       .set("Content-Type", "application/json")
       .then(resp => resp)
@@ -111,54 +89,10 @@ describe("Check that the request/response behavior of the TinyNode overwrite rou
  *
  *  - Incorrect HTTP method
  *  - Invalid JSON body
+ * 
+ * Note: /app/overwrite uses the same logic and would be a redundant test.
  */
 describe("Check that incorrect TinyNode overwrite route usage results in expected RESTful responses from RERUM.  __rest __core", () => {
-  it("Incorrect '/app/overwrite' route usage has expected RESTful responses.", async () => {
-    let response = null
-    // Wrong Method
-
-    response = await request(routeTester)
-      .get("/app/overwrite")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(405)
-
-    response = await request(routeTester)
-      .post("/app/overwrite")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(405)
-
-    response = await request(routeTester)
-      .patch("/app/overwrite")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(405)
-
-    response = await request(routeTester)
-      .delete("/app/overwrite")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(405)
-
-    // Bad request body
-    response = await request(routeTester)
-      .put("/app/overwrite")
-      .set("Content-Type", "application/json")
-      .send("not json")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(400)
-
-    response = await request(routeTester)
-      .put("/app/overwrite")
-      .set("Content-Type", "application/json")
-      .send({ "no": "@id" })
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(400)
-  })
-
   it("Incorrect '/overwrite' route usage has expected RESTful responses.", async () => {
     let response = null
 
@@ -208,7 +142,8 @@ describe("Check that incorrect TinyNode overwrite route usage results in expecte
 
 /**
  * Full integration test.  Checks the TinyNode app overwrite endpoint functionality and RERUM connection.
- * Note this endpoint also has the '/app/overwrite' alias.
+ * 
+ * Note: /app/overwrite uses the same logic and would be a redundant test.
  */
 describe("Check that the properly used overwrite endpoints function and interact with RERUM.  __e2e", () => {
   it("'/overwrite' route can overwrite an object in RERUM.", async () => {

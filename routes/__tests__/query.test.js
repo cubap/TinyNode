@@ -60,24 +60,13 @@ describe("Check that the expected TinyNode query route patterns are registered."
  *   - Does the route respond 201
  *   - Does the route respond with the object that was in the request body
  *   - Does the route respond with the proper 'Location' header
+ * 
+ * Note: /app/query uses the same logic and would be a redundant test.
  */
 describe("Check that the request/response behavior of the TinyNode query route functions.  Mock the connection to RERUM.  __mock_functions", () => {
   it("'/query' route request and response behavior is functioning.", async () => {
-
     const response = await request(routeTester)
       .post("/query")
-      .send({ "test": "item" })
-      .set("Content-Type", "application/json")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(200)
-    expect(response.body[0].test).toBe("item")
-  })
-
-  it("'/app/query' route request and response behavior is functioning.", async () => {
-
-    const response = await request(routeTester)
-      .post("/app/query")
       .send({ "test": "item" })
       .set("Content-Type", "application/json")
       .then(resp => resp)
@@ -92,45 +81,10 @@ describe("Check that the request/response behavior of the TinyNode query route f
  *
  *  - Incorrect HTTP method
  *  - Invalid JSON body
+ * 
+ * Note: /app/query uses the same logic and would be a redundant test.
  */
 describe("Check that incorrect TinyNode query route usage results in expected RESTful responses from RERUM.  __rest __core", () => {
-  it("Incorrect '/app/query' route usage has expected RESTful responses.", async () => {
-    let response = null
-    // Wrong Method
-    response = await request(routeTester)
-      .get("/app/query")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(405)
-
-    response = await request(routeTester)
-      .put("/app/query")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(405)
-
-    response = await request(routeTester)
-      .patch("/app/query")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(405)
-
-    response = await request(routeTester)
-      .delete("/app/query")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(405)
-
-    // Bad request body
-    response = await request(routeTester)
-      .post("/app/query")
-      .set("Content-Type", "application/json")
-      .send("not json")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(400)
-  })
-
   it("Incorrect '/query' route usage has expected RESTful responses.", async () => {
     let response = null
 
@@ -171,7 +125,8 @@ describe("Check that incorrect TinyNode query route usage results in expected RE
 
 /**
  * Full integration test.  Checks the TinyNode app query endpoint functionality and RERUM connection.
- * Note this endpoint also has the '/app/query' alias.
+ * 
+ * Note: /app/query uses the same logic and would be a redundant test.
  */
 describe("Check that the properly used query endpoints function and interact with RERUM.  __e2e", () => {
   it("'/query' route can save an object to RERUM.", async () => {

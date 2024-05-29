@@ -68,35 +68,13 @@ describe("Check that the expected TinyNode update route patterns are registered.
  *   - Does the route respond 200
  *   - Does the route respond with the object that was in the request body
  *   - Does the route respond with the proper 'Location' header
+ * 
+ * Note: /app/update uses the same logic and would be a redundant test.
  */
 describe("Check that the request/response behavior of the TinyNode update route functions.  Mock the connection to RERUM.  __mock_functions", () => {
   it("'/update' route request and response behavior is functioning.", async () => {
     const response = await request(routeTester)
       .put("/update")
-      .send({ "@id": rerum_uri_orig, "testing": "item" })
-      .set("Content-Type", "application/json")
-      .then(resp => resp)
-      .catch(err => err)
-    //FIXME to uncomment these: https://github.com/CenterForDigitalHumanities/TinyNode/issues/88
-    //expect(response.header.location).toBe(rerum_uri_updated)
-    expect(response.statusCode).toBe(200)
-    expect(response.body.testing).toBe("item")
-  })
-
-  it("'/app/update' route request and response behavior is functioning.", async () => {
-
-    /** 
-     * Request/Response Mock Using manual fetch replacement
-     * This is overruling the fetch(store.rerum.io/v1/api/update) call in update.js
-     */
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        json: () => Promise.resolve({ "@id": rerum_uri_updated, "testing": "item", "__rerum": { "stuff": "here" } })
-      })
-    )
-
-    const response = await request(routeTester)
-      .put("/app/update")
       .send({ "@id": rerum_uri_orig, "testing": "item" })
       .set("Content-Type", "application/json")
       .then(resp => resp)
@@ -113,54 +91,10 @@ describe("Check that the request/response behavior of the TinyNode update route 
  *
  *  - Incorrect HTTP method
  *  - Invalid JSON body
+ * 
+ * Note: /app/update uses the same logic and would be a redundant test.
  */
 describe("Check that incorrect TinyNode update route usage results in expected RESTful responses from RERUM.  __rest __core", () => {
-  it("Incorrect '/app/update' route usage has expected RESTful responses.", async () => {
-    let response = null
-    // Wrong Method
-
-    response = await request(routeTester)
-      .get("/app/update")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(405)
-
-    response = await request(routeTester)
-      .post("/app/update")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(405)
-
-    response = await request(routeTester)
-      .patch("/app/update")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(405)
-
-    response = await request(routeTester)
-      .delete("/app/update")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(405)
-
-    // Bad request body
-    response = await request(routeTester)
-      .put("/app/update")
-      .set("Content-Type", "application/json")
-      .send("not json")
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(400)
-
-    response = await request(routeTester)
-      .put("/app/update")
-      .set("Content-Type", "application/json")
-      .send({ "no": "@id" })
-      .then(resp => resp)
-      .catch(err => err)
-    expect(response.statusCode).toBe(400)
-  })
-
   it("Incorrect '/update' route usage has expected RESTful responses.", async () => {
     let response = null
 
@@ -210,7 +144,8 @@ describe("Check that incorrect TinyNode update route usage results in expected R
 
 /**
  * Full integration test.  Checks the TinyNode app update endpoint functionality and RERUM connection.
- * Note this endpoint also has the '/app/update' alias.
+ * 
+ * Note: /app/update uses the same logic and would be a redundant test.
  */
 describe("Check that the properly used update endpoints function and interact with RERUM.  __e2e", () => {
   it("'/update' route can update an object in RERUM.", async () => {

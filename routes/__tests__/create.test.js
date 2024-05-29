@@ -12,7 +12,6 @@ routeTester.use("/create", createRoute)
 routeTester.use("/app/create", createRoute)
 
 const rerum_uri = `${process.env.RERUM_ID_PATTERN}_not_`
-console.log(rerum_uri)
 
 beforeEach(() => {
   /** 

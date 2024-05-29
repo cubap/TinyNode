@@ -16,7 +16,6 @@ router.delete('/', async (req, res, next) => {
         'Content-Type' : "application/json; charset=utf-8"
       }
     }
-    console.log(body)
     const deleteURL = `${process.env.RERUM_API_ADDR}delete`
     const result = await fetch(deleteURL, deleteOptions).then(res => res.text())
     res.status(204)

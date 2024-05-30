@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - '*'
-      - '!deepfakemain'
+      - '!main'
       - '!release'
 jobs:
   check_for_open_pr:

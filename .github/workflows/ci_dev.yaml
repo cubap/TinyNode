@@ -1,7 +1,7 @@
-name: TinyNode end to end tests on PR to deepfakemain
+name: TinyNode end to end tests on PR to main
 on:
   pull_request:
-    branches: deepfakemain
+    branches: main
 jobs:
   test:
     strategy:

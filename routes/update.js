@@ -1,8 +1,9 @@
 import express from "express"
 const router = express.Router()
+import rerumPropertiesWasher from "../preprocessor.js"
 
 /* PUT an update to the thing. */
-router.put('/', async (req, res, next) => {
+router.put('/', rerumPropertiesWasher, async (req, res, next) => {
 
   try {
     // check body for JSON

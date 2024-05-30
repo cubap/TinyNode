@@ -111,7 +111,7 @@ function update(form, objIn) {
         _customEvent("rerum-result", "Updated object with URI " + uri + ".  See resulting object below.", resultObj)
     })
     .catch(err => {
-        _customEvent("rerum-error", "There was an error trying to update object at " + url, {}, err)
+        _customEvent("rerum-error", "There was an error trying to update object at " + uri, {}, err)
     })
 }
 

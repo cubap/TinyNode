@@ -23,6 +23,10 @@ beforeEach(() => {
       json: () => Promise.resolve({ "@id": rerum_tiny_test_obj_id, "testing": "item", "__rerum": { "stuff": "here" } })
     })
   )
+
+  global.isTokenExpired = jest.fn(() => {
+    return false
+  })
 })
 
 afterEach(() => {

@@ -23,6 +23,10 @@ beforeEach(() => {
       text: () => Promise.resolve("")
     })
   )
+
+  global.isTokenExpired = jest.fn(() => {
+    return false
+  })
 })
 
 /**

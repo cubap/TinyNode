@@ -16,7 +16,7 @@ import cors from "cors"
 import { updateExpiredToken } from "./tokens.js"
 
 // Check for and update token on app start
-updateExpiredToken()
+//updateExpiredToken()
 
 let app = express()
 

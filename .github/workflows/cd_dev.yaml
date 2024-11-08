@@ -22,6 +22,7 @@ jobs:
         machines:
           - vlcdhp02
     runs-on: ubuntu-latest
+    steps:
       - name: Setup Node.js
         uses: actions/setup-node@master
         with:

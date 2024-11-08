@@ -1,12 +1,11 @@
 import request from "supertest"
 import { jest } from "@jest/globals"
-import { updateExpiredToken } from "../../tokens.js"
 import app from "../../app.js"
 
 beforeEach(() => {
-  updateExpiredToken = jest.fn().mockReturnValue(true);
+  //updateExpiredToken = jest.fn().mockReturnValue(true);
   //updateExpiredToken = jest.fn(() => true)
-  //global.updateExpiredToken = jest.fn().mockReturnValue(true);
+  global.updateExpiredToken = jest.fn().mockReturnValue(true);
   //global.updateExpiredToken = jest.fn(() => true)
 })
 

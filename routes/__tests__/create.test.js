@@ -1,10 +1,10 @@
 import express from "express"
 import request from "supertest"
 import { jest } from "@jest/globals"
-import dotenv from "dotenv"
-dotenv.config()
+
 import createRoute from "../create.js"
 import app from "../../app.js"
+
 const routeTester = new express()
 routeTester.use(express.json())
 routeTester.use(express.urlencoded({ extended: false }))

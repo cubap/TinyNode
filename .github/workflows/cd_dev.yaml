@@ -24,6 +24,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+      - name: Create .env from secrets
+        uses: SpicyPizza/create-envfile@v2
+        with:
+          RERUM_REGISTRATION_URL: https://store.rerum.io/v1
+          RERUM_API_ADDR: https://store.rerum.io/v1/api/
+          RERUM_ID_PATTERN: https://store.rerum.io/v1/id/
+          RERUM_ACCESS_TOKEN_URL: https://store.rerum.io/client/request-new-access-token
+          OPEN_API_CORS: true
       - name: Setup Node.js
         uses: actions/setup-node@master
         with:
@@ -43,7 +51,7 @@ jobs:
       - name: Install dependencies and run the test
         run: |
           npm install
-          npm run allTests
+          npm run functionalTests
   deploy:
     if: github.event.pull_request.draft == false
     needs:

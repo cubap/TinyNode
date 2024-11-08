@@ -4,14 +4,16 @@ import app from "../../app.js"
 
 
 beforeEach(() => {
+  global.updateExpiredToken = jest.fn(() => true)
+  global.isTokenExpired = jest.fn((tok) => false)
 
-  updateExpiredToken = jest.fn(() => {
-    return true
-  })
+  // updateExpiredToken = jest.fn(() => {
+  //   return true
+  // })
 
-  isTokenExpired = jest.fn((tok) => {
-    return false
-  })
+  // isTokenExpired = jest.fn((tok) => {
+  //   return false
+  // })
 })
 
 afterEach(() => {

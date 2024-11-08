@@ -3,21 +3,14 @@ import app from "../../app.js"
 
 beforeEach(() => {
 
-  updateExpiredToken = jest.fn(() =>
-    Promise.resolve(true)
-  )
+  jest.mock('app', () => ({
+    updateExpiredToken: jest.fn(() => true)
+  }))
 
-  isTokenExpired = jest.fn(() =>
-    Promise.resolve(false)
-  )
-
-  updateExpiredToken = jest.fn(() => {
-    return true
-  })
-
-  isTokenExpired = jest.fn(() => {
-    return false
-  })
+  jest.mock('app', () => ({
+    isTokenExpired: jest.fn(() => false)
+  }))
+  
 })
 
 afterEach(() => {

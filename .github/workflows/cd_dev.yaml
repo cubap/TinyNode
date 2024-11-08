@@ -61,7 +61,7 @@ jobs:
           cd /srv/node/tiny-node/
           pm2 stop tinyNode
           git stash
-          git checkout tests-then-deploy
+          git checkout ${{ github.head_ref }}
           git pull
           npm install
           pm2 start -i max bin/tinyNode.js

@@ -77,8 +77,7 @@ describe("Check that the request/response behavior of the TinyNode overwrite rou
       .set("Content-Type", "application/json")
       .then(resp => resp)
       .catch(err => err)
-    //FIXME to uncomment these: https://github.com/CenterForDigitalHumanities/TinyNode/issues/88
-    //expect(response.header.location).toBe(rerum_tiny_test_obj_id)
+    expect(response.header.location).toBe(rerum_tiny_test_obj_id)
     expect(response.statusCode).toBe(200)
     expect(response.body.testing).toBe("item")
   })
@@ -143,7 +142,7 @@ describe("Check that incorrect TinyNode overwrite route usage results in expecte
 /**
  * Full integration test.  Checks the TinyNode app overwrite endpoint functionality and RERUM connection.
  * 
- * Note: /app/overwrite uses the same logic and would be a redundant test.
+ * Note: /app/update uses the same logic.
  */
 describe("Check that the properly used overwrite endpoints function and interact with RERUM.  __e2e", () => {
   it("'/overwrite' route can overwrite an object in RERUM.", async () => {
@@ -153,9 +152,8 @@ describe("Check that the properly used overwrite endpoints function and interact
       .set("Content-Type", "application/json")
       .then(resp => resp)
       .catch(err => err)
-    //FIXME to uncomment these: https://github.com/CenterForDigitalHumanities/TinyNode/issues/88
-    //expect(response.header).toHaveProperty("location")
-    //expect(response.header.location).toBe(rerum_tiny_test_obj_id)
+    expect(response.header).toHaveProperty("location")
+    expect(response.header.location).toBe(rerum_tiny_test_obj_id)
     expect(response.statusCode).toBe(200)
     expect(response.body.testing).toBe("item")
   })

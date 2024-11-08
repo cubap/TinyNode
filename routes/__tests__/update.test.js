@@ -18,7 +18,7 @@ const rerum_tiny_test_obj_id = `${process.env.RERUM_ID_PATTERN}tiny_tester`
 beforeEach(() => {
   /** 
    * Request/Response Mock Using manual fetch replacement
-   * This is overruling the fetch(store.rerum.io/v1/api/create) call in create.js
+   * This is overruling the fetch(store.rerum.io/v1/api/create) call in update.js
    */
   global.fetch = jest.fn(() =>
     Promise.resolve({
@@ -80,7 +80,7 @@ describe("Check that the request/response behavior of the TinyNode update route 
       .then(resp => resp)
       .catch(err => err)
     //FIXME to uncomment these: https://github.com/CenterForDigitalHumanities/TinyNode/issues/88
-    //expect(response.header.location).toBe(rerum_uri_updated)
+    expect(response.header.location).toBe(rerum_uri_updated)
     expect(response.statusCode).toBe(200)
     expect(response.body.testing).toBe("item")
   })
@@ -155,9 +155,8 @@ describe("Check that the properly used update endpoints function and interact wi
       .set("Content-Type", "application/json")
       .then(resp => resp)
       .catch(err => err)
-    //FIXME to uncomment these: https://github.com/CenterForDigitalHumanities/TinyNode/issues/88
-    //expect(response.header).toHaveProperty("location")
-    //expect(response.header.location).not().toBe(rerum_tiny_test_obj_id)
+    expect(response.header).toHaveProperty("location")
+    expect(response.header.location).not().toBe(rerum_tiny_test_obj_id)
     expect(response.statusCode).toBe(200)
     expect(response.body.testing).toBe("item")
   })

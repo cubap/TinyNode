@@ -1,6 +1,6 @@
 import request from "supertest"
 import { jest } from "@jest/globals"
-import { updateExpiredToken } from "./tokens.js"
+import { updateExpiredToken } from "../../tokens.js"
 import app from "../../app.js"
 
 beforeEach(() => {

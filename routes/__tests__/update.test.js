@@ -156,7 +156,7 @@ describe("Check that the properly used update endpoints function and interact wi
       .then(resp => resp)
       .catch(err => err)
     expect(response.header).toHaveProperty("location")
-    expect(response.header.location).not().toBe(rerum_tiny_test_obj_id)
+    expect(response.header.location).not.toBe(rerum_tiny_test_obj_id)
     expect(response.statusCode).toBe(200)
     expect(response.body.testing).toBe("item")
   })

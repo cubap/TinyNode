@@ -1,16 +1,17 @@
 import request from "supertest"
+import { jest } from "@jest/globals"
 import app from "../../app.js"
+
 
 beforeEach(() => {
 
-  jest.mock('app', () => ({
-    updateExpiredToken: jest.fn(() => true)
-  }))
+  updateExpiredToken = jest.fn(() => {
+    return true
+  })
 
-  jest.mock('app', () => ({
-    isTokenExpired: jest.fn(() => false)
-  }))
-  
+  isTokenExpired = jest.fn((tok) => {
+    return false
+  })
 })
 
 afterEach(() => {

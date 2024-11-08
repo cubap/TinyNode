@@ -31,7 +31,7 @@ jobs:
           envkey_RERUM_API_ADDR: https://devstore.rerum.io/v1/api/
           envkey_RERUM_ID_PATTERN: https://devstore.rerum.io/v1/id/
           envkey_RERUM_ACCESS_TOKEN_URL: https://devstore.rerum.io/client/request-new-access-token
-          envkey_ACCESS_TOKEN: babababababababababababababa
+          envkey_ACCESS_TOKEN: babababababab.abababababababa
       - name: Setup Node.js
         uses: actions/setup-node@master
         with:

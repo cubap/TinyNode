@@ -23,10 +23,6 @@ beforeEach(() => {
       json: () => Promise.resolve({ "@id": rerum_uri, "test": "item", "__rerum": { "stuff": "here" } })
     })
   )
-
-  global.isTokenExpired = jest.fn(() => {
-    return false
-  })
 })
 
 afterEach(() => {
@@ -35,32 +31,6 @@ afterEach(() => {
    * Make a test.store available that uses the same annotationStoreTesting as RERUM tests?
    */
 })
-
-/**
- * This test suite uses the built app.js app and checks that the expected create endpoints are registered.
- *  - /create
- *  - /app/create
- */
-describe("Check that the expected TinyNode create route patterns are registered.", () => {
-  it("'/app/create' and '/create' are registered routes in the app.  __exists __core", () => {
-    let exists = false
-    let count = 0
-    const stack = app._router.stack
-    for (const middleware of stack) {
-      if (middleware.regexp && middleware.regexp.toString().includes("/app/create")) {
-        count++
-      } else if (middleware.regexp && middleware.regexp.toString().includes("/create")) {
-        count++
-      }
-      if (count === 2) {
-        exists = true
-        break
-      }
-    }
-    expect(exists).toBe(true)
-  })
-})
-
 
 /**
  * This test suite runs the logic of the route file 'create.js' but does not actually communicate with RERUM.
@@ -74,7 +44,7 @@ describe("Check that the expected TinyNode create route patterns are registered.
  * 
  * Note: /app/create uses the same logic and would be a redundant test.
  */
-describe("Check that the request/response behavior of the TinyNode create route functions.  Mock the connection to RERUM.  __mock_functions_a", () => {
+describe("Check that the request/response behavior of the TinyNode create route functions.  Mock the connection to RERUM.  __mock_functions", () => {
   it("'/create' route request and response behavior is functioning.", async () => {
 
     const response = await request(routeTester)

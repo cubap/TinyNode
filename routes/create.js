@@ -12,7 +12,7 @@ router.post('/', async (req, res, next) => {
       body,
       headers: {
         'user-agent': 'Tiny-Things/1.0',
-        'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`, // not required for query
+        'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`,
         'Content-Type' : "application/json;charset=utf-8"
       }
     }

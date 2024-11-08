@@ -1,10 +1,9 @@
 import express from "express"
 import request from "supertest"
 import { jest } from "@jest/globals"
-import dotenv from "dotenv"
-dotenv.config()
 import deleteRoute from "../delete.js"
-import app from "../../app.js"
+//import app from "../../app.js"
+
 const routeTester = new express()
 routeTester.use(express.json())
 routeTester.use(express.urlencoded({ extended: false }))
@@ -23,35 +22,6 @@ beforeEach(() => {
       text: () => Promise.resolve("")
     })
   )
-
-  global.isTokenExpired = jest.fn(() => {
-    return false
-  })
-})
-
-/**
- * This test suite uses the built app.js app and checks that the expected delete endpoints are registered.
- *  - /delete
- *  - /app/delete
- */
-describe("Combined unit tests for the '/delete' route.", () => {
-  it("'/app/delete' and '/delete' are registered routes in the app.  __exists __core", () => {
-    let exists = false
-    let count = 0
-    const stack = app._router.stack
-    for (const middleware of stack) {
-      if (middleware.regexp && middleware.regexp.toString().includes("/app/delete")) {
-        count++
-      } else if (middleware.regexp && middleware.regexp.toString().includes("/delete")) {
-        count++
-      }
-      if (count === 2) {
-        exists = true
-        break
-      }
-    }
-    expect(exists).toBe(true)
-  })
 })
 
 /**

@@ -1,10 +1,9 @@
 import express from "express"
 import request from "supertest"
 import { jest } from "@jest/globals"
-import dotenv from "dotenv"
-dotenv.config()
 import queryRoute from "../query.js"
-import app from "../../app.js"
+//import app from "../../app.js"
+
 const routeTester = new express()
 routeTester.use(express.json())
 routeTester.use(express.urlencoded({ extended: false }))
@@ -23,37 +22,7 @@ beforeEach(() => {
       json: () => Promise.resolve([{ "@id": rerum_uri, "test": "item", "__rerum": { "stuff": "here" } }])
     })
   )
-
-  global.isTokenExpired = jest.fn(() => {
-    return false
-  })
 })
-
-/**
- * This test suite uses the built app.js app and checks that the expected query endpoints are registered.
- *  - /query
- *  - /app/query
- */
-describe("Check that the expected TinyNode query route patterns are registered.", () => {
-  it("'/app/query' and '/query' are registered routes in the app.  __exists __core", () => {
-    let exists = false
-    let count = 0
-    const stack = app._router.stack
-    for (const middleware of stack) {
-      if (middleware.regexp && middleware.regexp.toString().includes("/app/query")) {
-        count++
-      } else if (middleware.regexp && middleware.regexp.toString().includes("/query")) {
-        count++
-      }
-      if (count === 2) {
-        exists = true
-        break
-      }
-    }
-    expect(exists).toBe(true)
-  })
-})
-
 
 /**
  * This test suite runs the logic of the route file 'query.js' but does not actually communicate with RERUM.

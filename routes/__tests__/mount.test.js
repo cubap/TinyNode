@@ -1,9 +1,9 @@
 import request from "supertest"
 import { jest } from "@jest/globals"
 import app from "../../app.js"
-import { updateExpiredToken } from "../../tokens.js"
 
 beforeEach(() => {
+  // This comes from tokens.js in the app.js import.  We have to mock it, we don't do tokens here.
   updateExpiredToken = jest.fn(() => true)
 })
 

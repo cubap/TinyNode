@@ -23,6 +23,8 @@ beforeEach(() => {
       json: () => Promise.resolve({ "@id": rerum_uri, "test": "item", "__rerum": { "stuff": "here" } })
     })
   )
+
+  global.isTokenExpired = jest.fn(() => {return false})
 })
 
 afterEach(() => {
@@ -70,7 +72,7 @@ describe("Check that the expected TinyNode create route patterns are registered.
  * 
  * Note: /app/create uses the same logic and would be a redundant test.
  */
-describe("Check that the request/response behavior of the TinyNode create route functions.  Mock the connection to RERUM.  __mock_functions", () => {
+describe("Check that the request/response behavior of the TinyNode create route functions.  Mock the connection to RERUM.  __mock_functions_a", () => {
   it("'/create' route request and response behavior is functioning.", async () => {
 
     const response = await request(routeTester)

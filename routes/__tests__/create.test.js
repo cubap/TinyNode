@@ -3,7 +3,7 @@ import request from "supertest"
 import { jest } from "@jest/globals"
 
 import createRoute from "../create.js"
-import app from "../../app.js"
+//import app from "../../app.js"
 
 const routeTester = new express()
 routeTester.use(express.json())
@@ -24,7 +24,9 @@ beforeEach(() => {
     })
   )
 
-  global.isTokenExpired = jest.fn(() => {return false})
+  global.isTokenExpired = jest.fn(() => {
+    return false
+  })
 })
 
 afterEach(() => {

@@ -1,13 +1,16 @@
-name: TinyNode end to end tests on PR to release
+# NOTES for if we want to do releases
+
+
+name: TinyNode end to end tests on PR to main
 on:
   pull_request:
-    branches: release
+    branches: main
 jobs:
   test:
     strategy:
       matrix:
         machines:
-          - vlcdhprdp02
+          - vlcdhp02
     runs-on: ${{ matrix.machines }}
     steps:
       - uses: actions/checkout@master

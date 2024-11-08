@@ -1,10 +1,12 @@
+# NOTES for if we want to do releases
+
+
 name: TinyNode tests on any push to a branch without an open PR
 on:
   push:
     branches:
       - '*'
       - '!main'
-      - '!release'
 jobs:
   check_for_open_pr:
     runs-on: ubuntu-latest

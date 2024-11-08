@@ -6,32 +6,30 @@ import rerumPropertiesWasher from "../preprocessor.js"
 router.put('/', rerumPropertiesWasher, async (req, res, next) => {
 
   try {
+    // check for @id in body.  Any value is valid.  Lack of value is a bad request.
+    if (!req?.body || !(req.body['@id'] ?? req.body.id)) {
+      res.status(400).send("No record id to update! (https://store.rerum.io/v1/API.html#update)")
+    }
     // check body for JSON
     const body = JSON.stringify(req.body)
-
-    // check for @id; any value is valid
-    if (!(req.body['@id'])) {
-      throw Error("No record id to update! (https://centerfordigitalhumanities.github.io/rerum_server/API.html#update)")
-    }
-
     const updateOptions = {
       method: 'PUT',
       body,
       headers: {
         'user-agent': 'Tiny-Things/1.0',
-        'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`, // not required for query
+        'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`,
         'Content-Type' : "application/json;charset=utf-8"
       }
     }
     const updateURL = `${process.env.RERUM_API_ADDR}update`
     const result = await fetch(updateURL, updateOptions).then(res=>res.json())
     .catch(err=>next(err))
+    res.setHeader("Location", result["@id"])
     res.status(200)
     res.send(result)
   }
   catch (err) {
-    console.log(err)
-    res.status(500).send("Caught Error:" + err)
+    next(err)
   }
 })
 

@@ -6,6 +6,10 @@ const router = express.Router()
 /* DELETE a delete to the thing. */
 router.delete('/', async (req, res, next) => {
   try {
+    // check for @id in body.  Any value is valid.  Lack of value is a bad request.
+    if (!req?.body || !(req.body['@id'] ?? req.body.id)) {
+      res.status(400).send("No record id to delete! (https://store.rerum.io/v1/API.html#delete)")
+    }
     const body = JSON.stringify(req.body)
     const deleteOptions = {
       body,
@@ -16,15 +20,13 @@ router.delete('/', async (req, res, next) => {
         'Content-Type' : "application/json; charset=utf-8"
       }
     }
-    console.log(body)
     const deleteURL = `${process.env.RERUM_API_ADDR}delete`
     const result = await fetch(deleteURL, deleteOptions).then(res => res.text())
     res.status(204)
     res.send(result)
   }
   catch (err) {
-    console.log(err)
-    res.status(500).send("Caught Error:" + err)
+    next(err)
   }
 })
 
@@ -46,8 +48,7 @@ router.delete('/:id', async (req, res, next) => {
     res.send(result)
   }
   catch (err) {
-    console.log(err)
-    res.status(500).send("Caught Error:" + err)
+    next(err)
   }
 })
 

@@ -6,14 +6,12 @@ import rerumPropertiesWasher from "../preprocessor.js"
 router.put('/', rerumPropertiesWasher, async (req, res, next) => {
 
   try {
+    // check for @id in body.  Any value is valid.  Lack of value is a bad request.
+    if (!req?.body || !(req.body['@id'] ?? req.body.id)) {
+      res.status(400).send("No record id to overwrite! (https://store.rerum.io/v1/API.html#overwrite)")
+    }
     // check body for JSON
     const body = JSON.stringify(req.body)
-
-    // check for @id; any value is valid
-    if (!(req.body['@id'])) {
-      throw Error("No record id to overwrite! (https://centerfordigitalhumanities.github.io/rerum_server/API.html#overwrite)")
-    }
-
     const overwriteOptions = {
       method: 'PUT',
       body,
@@ -26,12 +24,12 @@ router.put('/', rerumPropertiesWasher, async (req, res, next) => {
     const overwriteURL = `${process.env.RERUM_API_ADDR}overwrite`
     const result = await fetch(overwriteURL, overwriteOptions).then(res=>res.json())
     .catch(err=>next(err))
+    res.setHeader("Location", result["@id"])
     res.status(200)
     res.send(result)
   }
   catch (err) {    
-    console.log(err)
-    res.status(500).send("Caught Error:" + err)
+    next(err)
   }
 })
 

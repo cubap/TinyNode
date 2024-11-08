@@ -17,22 +17,24 @@ jobs:
           message: Merge main into this branch to deploy to dev for testing.
   test:
     needs: merge-branch
+    strategy:
+      matrix:
+        machines:
+          - vlcdhp02
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
       - name: Create .env from secrets
         uses: SpicyPizza/create-envfile@v2
         with:
-          envkey_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          envkey_REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
-          envkey_RERUM_REGISTRATION_URL: ${{ secrets.RERUM_REGISTRATION_URL }}
-          envkey_RERUM_API_ADDR: ${{ secrets.RERUM_API_ADDR }}
-          envkey_RERUM_ID_PATTERN: ${{ secrets.RERUM_ID_PATTERN }}
-          envkey_RERUM_ACCESS_TOKEN_URL: ${{ secrets.RERUM_ACCESS_TOKEN_URL }}
+          envkey_RERUM_REGISTRATION_URL: https://devstore.rerum.io/v1
+          envkey_RERUM_API_ADDR: https://devstore.rerum.io/v1/api/
+          envkey_RERUM_ID_PATTERN: https://devstore.rerum.io/v1/id/
+          envkey_RERUM_ACCESS_TOKEN_URL: https://devstore.rerum.io/client/request-new-access-token
       - name: Setup Node.js
         uses: actions/setup-node@master
         with:
-          node-version: "21"
+          node-version: "20"
       - name: Cache node modules
         uses: actions/cache@master
         env:
@@ -48,7 +50,7 @@ jobs:
       - name: Install dependencies and run the test
         run: |
           npm install
-          npm run runtest
+          npm run functionalTests
   deploy:
     if: github.event.pull_request.draft == false
     needs:
@@ -56,6 +58,8 @@ jobs:
       - test
     strategy:
       matrix:
+        node-version:
+          - 20
         machines:
           - vlcdhp02
     runs-on: ${{ matrix.machines }}
@@ -70,6 +74,7 @@ jobs:
           cd /srv/node/tiny-node/
           pm2 stop tinyNode
           git stash
+          git checkout ${{ github.head_ref }}
           git pull
           npm install
           pm2 start -i max bin/tinyNode.js

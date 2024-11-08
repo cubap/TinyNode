@@ -12,7 +12,7 @@ router.post('/', async (req, res, next) => {
       body,
       headers: {
         'user-agent': 'Tiny-Things/1.0',
-        'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`, // not required for query
+        'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`,
         'Content-Type' : "application/json;charset=utf-8"
       }
     }
@@ -21,11 +21,10 @@ router.post('/', async (req, res, next) => {
     .catch(err=>next(err))
     res.setHeader("Location", result["@id"])
     res.status(201)
-    res.send(result)
+    res.json(result)
   }
   catch (err) {
-    console.log(err)
-    res.status(500).send("Caught Error:" + err)
+    next(err)
   }
 })
 

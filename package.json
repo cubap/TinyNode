@@ -26,6 +26,7 @@
     "functionalTests": "node --experimental-vm-modules node_modules/jest/bin/jest.js -t __mock_functions "
   },
   "dependencies": {
+    "@jest/globals": "^29.7.0",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^10.0.0",

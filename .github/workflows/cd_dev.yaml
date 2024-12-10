@@ -74,6 +74,7 @@ jobs:
           cd /srv/node/tiny-node/
           pm2 stop tinyNode
           git stash
+          git pull
           git checkout ${{ github.head_ref }}
           git pull
           npm install

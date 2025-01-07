@@ -2,14 +2,11 @@ import express from "express"
 const router = express.Router()
 
 /* POST a query to the thing. */
-router.get('/seconds/:_seconds', async (req, res, next) => {
+router.get('/:_seconds', async (req, res, next) => {
   try {
-    // check body for JSON
-    let time = parseInt(req.params["_seconds"]) * 1000
-    if (isNaN(time)) time=3000
-    if (time > 100000) time = 100000
-
-    const queryURL = `${process.env.RERUM_API_ADDR}seconds`
+    let time = parseInt(req.params["_seconds"])
+    const queryURL = `${process.env.RERUM_REGISTRATION_URL.replace("v1", "")}seconds/${time}`
+    console.log(queryURL)
     const results = await fetch(queryURL).then(res=>res.text())
     .catch(err=>next(err))
     res.status(200)

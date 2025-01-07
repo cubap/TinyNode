@@ -12,6 +12,7 @@ import createRouter from "./routes/create.js"
 import updateRouter from "./routes/update.js"
 import deleteRouter from "./routes/delete.js"
 import overwriteRouter from "./routes/overwrite.js"
+import secondsRouter from "./routes/seconds.js"
 import cors from "cors"
 import { updateExpiredToken } from "./tokens.js"
 
@@ -37,6 +38,7 @@ app.use('/create', createRouter)
 app.use('/update', updateRouter)
 app.use('/delete', deleteRouter)
 app.use('/overwrite', overwriteRouter)
+app.use('/seconds', secondsRouter)
 
 //Legacy support for /app
 app.use('/app', indexRouter)

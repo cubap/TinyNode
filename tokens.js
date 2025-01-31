@@ -60,6 +60,7 @@ async function checkJWT(req, res, next) {
     }
     catch (err) {
         console.log("TinyNode encountered an error trying to refresh its access token")
+        console.error(err)
         next(err)
     }
     

@@ -53,9 +53,6 @@ async function checkJWT(req, res, next) {
             console.log("TinyNode detected an expired access token.  Updating the token now.")
             await generateNewAccessToken()
         }
-        else{
-            console.log("TinyNode token is up to date")
-        }
         next()    
     }
     catch (err) {

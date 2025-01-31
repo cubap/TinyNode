@@ -53,8 +53,6 @@ describe("Check that the request/response behavior of the TinyNode create route 
       .set("Content-Type", "application/json")
       .then(resp => resp)
       .catch(err => err)
-    console.log("supertest headers from create test")
-    console.log(response.headers)
     expect(response.header.location).toBe(rerum_uri)
     expect(response.statusCode).toBe(201)
     expect(response.body.test).toBe("item")

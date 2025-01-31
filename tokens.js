@@ -10,9 +10,12 @@ const isTokenExpired = (token) => (Date.now() >= JSON.parse(Buffer.from(token.sp
 
 /**
  * Use the privately stored refresh token to generate a new access token for
- * your RERUM-connected application. There is no way to authenticate this 
+ * this instance of a RERUM connected TinyNode. There is no way to authenticate this 
  * process, so protect your refresh token and replace it if it is exposed. 
- * NOTE: This fails without updating or throwing an error.
+ * NOTE: This fails without updating or throwing an error (Auth0).
+ *
+ * You must have the correct refresh token in your configuration file.
+ * To learn more read CONTRIBUTING.md or see https://store.rerum.io/v1/API.html#registration
  */
 async function generateNewAccessToken() {
     const tokenObject = await fetch(process.env.RERUM_ACCESS_TOKEN_URL, {
@@ -43,11 +46,16 @@ async function generateNewAccessToken() {
 }
 
 /**
- * This will conduct a simple check against the expiry date in your token.
+ * Check if the Access Token from the configuration file is up to date.
+ * If it is expired programatically refresh the token and save the new token to the configuration file.
+ *
  * This does not validate your access token, so you may still be rejected by 
- * your RERUM instance as unauthorized.
+ * your RERUM instance as unauthorized to request a new access token.
+ *
+ * Note that you must have the correct refresh token in your configuration file.
+ * To learn more read CONTRIBUTING.md or see https://store.rerum.io/v1/API.html#registration
  */
-async function checkJWT(req, res, next) {
+async function checkAccessToken(req, res, next) {
     try {
         // If the instance of TinyNode is not registered and does not have a token then there is nothing to check.
         // Move on through the middleware.  RERUM will tell you what you did wrong.
@@ -69,4 +77,4 @@ async function checkJWT(req, res, next) {
     
 }
 
-export default checkJWT
+export default checkAccessToken

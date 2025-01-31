@@ -51,7 +51,7 @@ async function checkJWT(req, res, next) {
     try {
         // If there is no access token then there is nothing worth checking.
         // Move on through the middleware.  RERUM will tell you what you did wrong.
-        if(!process.env?.ACCESS_TOKEN){
+        if(!process.env?.ACCESS_TOKEN) {
             next()
         }
         if (isTokenExpired(process.env.ACCESS_TOKEN)) {

@@ -13,10 +13,6 @@ import updateRouter from "./routes/update.js"
 import deleteRouter from "./routes/delete.js"
 import overwriteRouter from "./routes/overwrite.js"
 import cors from "cors"
-import { updateExpiredToken } from "./tokens.js"
-
-// Check for and update token on app start
-//updateExpiredToken()
 
 let app = express()
 
@@ -24,7 +20,32 @@ app.use(logger('dev'))
 app.use(express.json())
 if(process.env.OPEN_API_CORS !== "false") { 
   // This enables CORS for all requests. We may want to update this in the future and only apply to some routes.
-  app.use(cors()) 
+  app.use(
+    cors({
+      "methods" : "GET,OPTIONS,HEAD,PUT,PATCH,DELETE,POST",
+      "allowedHeaders" : [
+        'Content-Type',
+        'Content-Length',
+        'Allow',
+        'Authorization',
+        'Location',
+        'ETag',
+        'Connection',
+        'Keep-Alive',
+        'Date',
+        'Cache-Control',
+        'Last-Modified',
+        'Link',
+        'X-HTTP-Method-Override',
+        'Origin',
+        'Referrer',
+        'User-Agent'
+      ],
+      "exposedHeaders" : "*",
+      "origin" : "*",
+      "maxAge" : "600"
+    })
+  )
 }
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))

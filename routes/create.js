@@ -1,8 +1,9 @@
 import express from "express"
+import checkAccessToken from "../tokens.js"
 const router = express.Router()
 
 /* POST a create to the thing. */
-router.post('/', async (req, res, next) => {
+router.post('/', checkAccessToken, async (req, res, next) => {
 
   try {
     // check body for JSON

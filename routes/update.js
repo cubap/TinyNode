@@ -1,9 +1,10 @@
 import express from "express"
+import checkAccessToken from "../tokens.js"
 const router = express.Router()
 import rerumPropertiesWasher from "../preprocessor.js"
 
 /* PUT an update to the thing. */
-router.put('/', rerumPropertiesWasher, async (req, res, next) => {
+router.put('/', checkAccessToken, rerumPropertiesWasher, async (req, res, next) => {
 
   try {
     // check for @id in body.  Any value is valid.  Lack of value is a bad request.

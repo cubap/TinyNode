@@ -53,7 +53,6 @@ describe("Check that the request/response behavior of the TinyNode update route 
       .set("Content-Type", "application/json")
       .then(resp => resp)
       .catch(err => err)
-    //FIXME to uncomment these: https://github.com/CenterForDigitalHumanities/TinyNode/issues/88
     expect(response.header.location).toBe(rerum_uri_updated)
     expect(response.statusCode).toBe(200)
     expect(response.body.testing).toBe("item")

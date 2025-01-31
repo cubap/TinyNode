@@ -13,10 +13,6 @@ import updateRouter from "./routes/update.js"
 import deleteRouter from "./routes/delete.js"
 import overwriteRouter from "./routes/overwrite.js"
 import cors from "cors"
-import { updateExpiredToken } from "./tokens.js"
-
-// Check for and update token on app start
-//updateExpiredToken()
 
 let app = express()
 

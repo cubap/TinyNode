@@ -1,8 +1,9 @@
 import express from "express"
+import checkJWT from "../tokens.js"
 const router = express.Router()
 
 /* POST a create to the thing. */
-router.post('/', async (req, res, next) => {
+router.post('/', checkJWT, async (req, res, next) => {
 
   try {
     // check body for JSON

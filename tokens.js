@@ -22,8 +22,11 @@ async function generateNewAccessToken() {
         },
         body: JSON.stringify({ "refresh_token": process.env.REFRESH_TOKEN }),
         timeout: 10000,
-    }).then(res => res.json())
-        .catch(err => console.error("Access token not updated: ", err))
+    })
+    .then(res => res.json())
+    .catch(err => {
+        throw err
+    })
     process.env.ACCESS_TOKEN = tokenObject.access_token
     try {
         const data = await fs.readFile('./.env', { encoding: 'utf8' })
@@ -44,14 +47,22 @@ async function generateNewAccessToken() {
  * This does not validate your access token, so you may still be rejected by 
  * your RERUM instance as unauthorized.
  */
-function updateExpiredToken() {
-    if (isTokenExpired(process.env.ACCESS_TOKEN)) {
-        console.log("TinyNode detected an expired access token.  Updating the token now.")
-        generateNewAccessToken()
+async function checkJWT(req, res, next) {
+    try {
+        if (isTokenExpired(process.env.ACCESS_TOKEN)) {
+            console.log("TinyNode detected an expired access token.  Updating the token now.")
+            await generateNewAccessToken()
+        }
+        else{
+            console.log("TinyNode token is up to date")
+        }
+        next()    
     }
-    else{
-        console.log("TinyNode token is up to date")
+    catch (err) {
+        console.log("TinyNode encountered an error trying to refresh its access token")
+        next(err)
     }
+    
 }
 
-export {updateExpiredToken}
+export default checkJWT

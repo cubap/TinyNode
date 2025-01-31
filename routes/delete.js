@@ -1,10 +1,11 @@
 import express from "express"
+import checkJWT from "../tokens.js"
 const router = express.Router()
 
 /* Legacy delete pattern w/body */
 
 /* DELETE a delete to the thing. */
-router.delete('/', async (req, res, next) => {
+router.delete('/', checkJWT, async (req, res, next) => {
   try {
     // check for @id in body.  Any value is valid.  Lack of value is a bad request.
     if (!req?.body || !(req.body['@id'] ?? req.body.id)) {

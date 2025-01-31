@@ -49,9 +49,9 @@ async function generateNewAccessToken() {
  */
 async function checkJWT(req, res, next) {
     try {
-        // If there is no access token then there is nothing worth checking.
+        // If the instance of TinyNode is not registered and does not have a token then there is nothing to check.
         // Move on through the middleware.  RERUM will tell you what you did wrong.
-        if(!process.env.ACCESS_TOKEN) {
+        if(!process?.env?.ACCESS_TOKEN) {
             next()
             return
         }

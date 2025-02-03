@@ -69,17 +69,6 @@ jobs:
       - uses: actions/checkout@master
       - name: Deploy the app on the server
         run: |
+          su nodeapps
           echo "What user am I in deploy stage?"
           echo $USER
-          if [[ ! -e /srv/node/logs/tinynode.txt ]]; then
-              mkdir -p /srv/node/logs
-              touch /srv/node/logs/tinynode.txt
-          fi
-          cd /srv/node/tiny-node/
-          pm2 stop tinyNode
-          git stash
-          git pull
-          git checkout ${{ github.head_ref }}
-          git pull
-          npm install
-          pm2 start -i max bin/tinyNode.js

@@ -49,6 +49,8 @@ jobs:
             ${{ runner.os }}-
       - name: Install dependencies and run the test
         run: |
+          echo "What user am I in test stage?"
+          echo $USER
           npm install
           npm run functionalTests
   deploy:
@@ -67,6 +69,8 @@ jobs:
       - uses: actions/checkout@master
       - name: Deploy the app on the server
         run: |
+          echo "What user am I in deploy stage?"
+          echo $USER
           if [[ ! -e /srv/node/logs/tinynode.txt ]]; then
               mkdir -p /srv/node/logs
               touch /srv/node/logs/tinynode.txt

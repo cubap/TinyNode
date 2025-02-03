@@ -49,6 +49,8 @@ jobs:
             ${{ runner.os }}-
       - name: Install dependencies and run the test
         run: |
+          echo "What user am I in test stage?"
+          echo $USER
           npm install
           npm run functionalTests
   deploy:
@@ -67,15 +69,6 @@ jobs:
       - uses: actions/checkout@master
       - name: Deploy the app on the server
         run: |
-          if [[ ! -e /srv/node/logs/tinynode.txt ]]; then
-              mkdir -p /srv/node/logs
-              touch /srv/node/logs/tinynode.txt
-          fi
-          cd /srv/node/tiny-node/
-          pm2 stop tinyNode
-          git stash
-          git pull
-          git checkout ${{ github.head_ref }}
-          git pull
-          npm install
-          pm2 start -i max bin/tinyNode.js
+          su nodeapps
+          echo "What user am I in deploy stage?"
+          echo $USER
